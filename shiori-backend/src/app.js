@@ -8,8 +8,13 @@ import { errorHandler } from "./middleware/error.middleware.js";
 import { notFound } from "./middleware/notFound.middleware.js";
 
 import healthRoutes from "./modules/health/health.routes.js";
+import authRoutes from "./modules/auth/auth.routes.js";
 import profileRoutes from "./modules/profile/profile.routes.js";
 import animeRoutes from "./modules/anime/anime.routes.js";
+import integrationRoutes from "./modules/integration/integration.routes.js";
+import providerRoutes from "./modules/provider/provider.routes.js";
+import downloadRoutes from "./modules/download/download.routes.js";
+import automationRoutes from "./modules/automation/automation.routes.js";
 
 const app = express();
 
@@ -38,8 +43,14 @@ app.use(limiter);
 
 // API routes
 app.use("/api/health", healthRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/anime", animeRoutes);
+app.use("/api/integration", integrationRoutes);
+app.use("/api/provider", providerRoutes);
+app.use("/api/download", downloadRoutes);
+app.use("/api/automation", automationRoutes);
+
 
 // Catch-all 404 and global error handlers
 app.use(notFound);

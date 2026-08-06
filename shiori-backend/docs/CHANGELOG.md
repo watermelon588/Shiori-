@@ -7,7 +7,18 @@ All notable changes to the Shiori project will be documented in this file.
 ## [Unreleased]
 
 ### Added
+- **Phase 0 (Foundation Setup)**:
+  - Scaffolded `src/shared/` layer (`response.js`, `errors.js`, `constants.js`) for standardized API responses, HTTP errors, and system constants.
+  - Created `src/services/` layer directory for future domain services.
+  - Scaffolded `src/modules/integration/` (`GET /api/integration/status`).
+  - Scaffolded `src/modules/provider/` (`GET /api/provider/status`, `GET /api/provider/providers`, `POST /api/provider/resolve` returning 501 Not Implemented).
+  - Scaffolded `src/modules/download/` (`POST /api/download`, `GET /api/download/:id`, `DELETE /api/download/:id` returning 501 Not Implemented).
+  - Scaffolded `src/modules/automation/` (`POST /api/automation/execute` returning 501 Not Implemented).
+  - Scaffolded `src/modules/auth/` (`GET /api/auth/status`).
+  - Extended `src/modules/health/` (`GET /api/health`) to report component status across `backend`, `database`, `supabase`, `integration`, `provider`, and `automation`.
+  - Registered all new modules inside `src/app.js`.
 - **Seanime Architecture Analysis**: Created comprehensive 27-section documentation in `docs/SEANIME_ARCHITECTURE_ANALYSIS.md` detailing startup sequence, Goja JS extension runtime, HTTP REST endpoints, WebSocket event model, GORM models, and Shiori integration options.
+
 
 ### Changed
 - **Seanime Environment Verification**: Validated Go 1.26+ and Node.js environment, downloaded and tidied all Go module dependencies (`go mod download`, `go mod tidy`), and installed React frontend dependencies (`seanime-web` npm packages).

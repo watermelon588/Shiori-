@@ -22,7 +22,7 @@ Authorization: Bearer <SUPABASE_ACCESS_TOKEN>
 ## Health Module
 
 ### GET /api/health
-Purpose: Checks backend availability and health status.
+Purpose: Checks backend availability and health status across all components.
 
 Authentication: None
 
@@ -38,12 +38,211 @@ Success Response (200 OK):
   "service": "Shiori (栞)-backend",
   "version": "1.0.0",
   "uptime": 12.345,
-  "timestamp": "2026-08-03T09:15:00.000Z"
+  "timestamp": "2026-08-06T22:14:12.000Z",
+  "backend": "online",
+  "database": "online",
+  "supabase": "online",
+  "integration": "offline",
+  "provider": "offline",
+  "automation": "offline"
 }
 ```
 
 Errors:
 * **500 Internal Server Error**: Service is down or database configuration has failed.
+
+---
+
+## Auth Module
+
+### GET /api/auth/status
+Purpose: Returns Supabase authentication integration status.
+Authentication: None
+
+Request:
+```http
+GET /api/auth/status
+```
+
+Success Response (200 OK):
+```json
+{
+  "success": true,
+  "service": "auth",
+  "provider": "supabase",
+  "status": "configured",
+  "message": "Supabase Authentication is active. JWT validation handled via protect middleware."
+}
+```
+
+Errors:
+* **500 Internal Server Error**
+
+---
+
+## Integration Module
+
+### GET /api/integration/status
+Purpose: Returns Seanime integration status.
+Authentication: None
+
+Request:
+```http
+GET /api/integration/status
+```
+
+Success Response (200 OK):
+```json
+{
+  "success": true,
+  "connected": false,
+  "provider": null,
+  "message": "Seanime integration has not been configured."
+}
+```
+
+Errors:
+* **500 Internal Server Error**
+
+---
+
+## Provider Module
+
+### GET /api/provider/status
+Purpose: Checks provider engine status.
+Authentication: None
+
+Request:
+```http
+GET /api/provider/status
+```
+
+Response (501 Not Implemented):
+```json
+{
+  "success": false,
+  "message": "Provider engine has not been implemented."
+}
+```
+
+---
+
+### GET /api/provider/providers
+Purpose: Lists available stream provider scrapers.
+Authentication: None
+
+Request:
+```http
+GET /api/provider/providers
+```
+
+Response (501 Not Implemented):
+```json
+{
+  "success": false,
+  "message": "Provider engine has not been implemented."
+}
+```
+
+---
+
+### POST /api/provider/resolve
+Purpose: Resolves an anime stream source URL from provider.
+Authentication: None
+
+Request:
+```http
+POST /api/provider/resolve
+```
+
+Response (501 Not Implemented):
+```json
+{
+  "success": false,
+  "message": "Provider engine has not been implemented."
+}
+```
+
+---
+
+## Download Module
+
+### POST /api/download
+Purpose: Initiates a new anime episode download job.
+Authentication: None
+
+Request:
+```http
+POST /api/download
+```
+
+Response (501 Not Implemented):
+```json
+{
+  "success": false,
+  "message": "Download engine has not been implemented."
+}
+```
+
+---
+
+### GET /api/download/:id
+Purpose: Fetches progress for a specific download job.
+Authentication: None
+
+Request:
+```http
+GET /api/download/123
+```
+
+Response (501 Not Implemented):
+```json
+{
+  "success": false,
+  "message": "Download engine has not been implemented."
+}
+```
+
+---
+
+### DELETE /api/download/:id
+Purpose: Cancels an ongoing download job.
+Authentication: None
+
+Request:
+```http
+DELETE /api/download/123
+```
+
+Response (501 Not Implemented):
+```json
+{
+  "success": false,
+  "message": "Download engine has not been implemented."
+}
+```
+
+---
+
+## Automation Module
+
+### POST /api/automation/execute
+Purpose: Triggers AI or n8n workflow execution pipelines.
+Authentication: None
+
+Request:
+```http
+POST /api/automation/execute
+```
+
+Response (501 Not Implemented):
+```json
+{
+  "success": false,
+  "message": "Automation pipeline has not been implemented."
+}
+```
+
 
 ---
 

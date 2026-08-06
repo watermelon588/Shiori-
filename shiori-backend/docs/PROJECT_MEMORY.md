@@ -6,18 +6,21 @@ Completed:
 - **Express Server Foundation**: Setup using Express 5, CORS, Helmet security headers, rate limiting, and global request logging via Pino HTTP.
 - **Database Connection**: MongoDB connection via Mongoose with configuration, error logging, and standard lifecycle handlers.
 - **Authentication System**: Supabase Auth client initialization and middleware to extract and verify user bearer JWTs.
-- **Health Module**: Basic health check and uptime reporting route (`GET /api/health`).
+- **Health Module**: Basic health check, uptime, and sub-system health reporting route (`GET /api/health`).
 - **Profile Module**: Profile controller, service, Zod validation, and schema definitions to retrieve/create/update user profiles (`GET /api/profile`, `PATCH /api/profile`).
 - **AI Agent Onboarding**: Initialized global and project agent instruction rules (`AGENT_INSTRUCTION.md` and `.agents/AGENTS.md`) and project documentation structure under `/docs`.
 - **Seanime Environment Setup & Build Validation**: Verified Go 1.26+ and Node.js dependencies, `go mod download`, `go mod tidy`, and `npm install` for `seanime-web`.
 - **Seanime Architecture Analysis**: Published 27-section architectural analysis (`docs/SEANIME_ARCHITECTURE_ANALYSIS.md`) detailing Seanime's facade pattern, Goja extension engine, AniList GraphQL integration, media pipelines, and recommended network API integration strategy.
+- **Phase 0 Foundation Setup Completed**: Built bare-minimum architecture with modular placeholders for `auth`, `integration`, `provider`, `download`, `automation`, `services/` layer, and `shared/` (`response.js`, `errors.js`, `constants.js`). Seanime remains strictly untouched, and all future communication will occur via API boundaries.
 
 Currently working:
-- Preparing Shiori backend network client gateway for integration with Seanime API.
+- Phase 0 verification & foundation validation completed. Preparing next architectural modules.
 
 Next Priority:
-- Implement Shiori Network Integration Client to interact with Seanime endpoints over HTTP REST & WebSockets.
+- Implement Provider Engine abstraction and scraper contracts.
 - Anime metadata service: integration with AniList GraphQL API to look up anime details, sync history, and search listings.
+- Seanime integration client setup via network API boundaries.
+
 
 ---
 

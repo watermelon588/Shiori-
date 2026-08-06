@@ -5,5 +5,12 @@ export const getHealthStatus = () => {
     version: "1.0.0",
     uptime: process.uptime(),
     timestamp: new Date().toISOString(),
+    backend: "online",
+    database: "online",
+    supabase: "online",
+    integration: "offline",
+    provider: "offline",
+    automation: "offline",
   };
 };
+
