@@ -1,4 +1,4 @@
-# Seanime (large local repository directory)
+﻿# Seanime (large local repository directory)
 seanime/
 /seanime
 
@@ -13,3 +13,7 @@ dist/
 build/
 logs/
 .DS_Store
+
+# Local tooling and the owner's original art drop (processed copies live in site/assets)
+.coding assistant/
+art-source/
