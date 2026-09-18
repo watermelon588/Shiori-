@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gallery · Shiori</title>
+    <meta name="description" content="The art behind Shiori: scenes, characters, manga pages and cut-outs, in one gallery." />
+    <meta property="og:image" content="assets/hero/a158.webp" />
+    <meta name="theme-color" content="#f6f8fb" />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+    <link rel="stylesheet" href="assets/css/nagi.css" />
+    <link rel="stylesheet" href="assets/css/nagi-art.css" />
+    <link rel="stylesheet" href="assets/css/gallery.css" />
+</head>
+<body>
+<a class="skip" href="#wall">Skip to the gallery</a>
+
+<header class="nav is-stuck" data-nav>
+    <a class="brand" href="./" aria-label="Shiori home"><img src="assets/logo.png" alt="" width="36" height="36" /><span>Shiori</span></a>
+    <nav aria-label="Primary"><a href="./">Home</a><a href="gallery.html" aria-current="page">Gallery</a><a href="docs.html">Docs</a><a href="./#support">Support</a></nav>
+    <div class="nav__end"><a class="nav__world" href="pop.html">乱舞 Pop</a><a class="btn btn--primary btn--sm" data-download href="docs.html#install"><i class="ph ph-download-simple"></i>Download</a></div>
+</header>
+
+<main>
+    <section class="g-head">
+        <h1 data-g-title>Gallery</h1>
+        <p><span data-g-count>169</span> scenes, characters, manga pages and cut-outs. The art behind both of Shiori's worlds.</p>
+    </section>
+
+    <!-- Two film strips of the refined plates drift in opposite directions; scrolling pushes them faster. -->
+    <section class="reel" aria-hidden="true">
+        <div class="reel__row" data-reel="1"></div>
+        <div class="reel__row" data-reel="-1"></div>
+    </section>
+
+    <section id="wall" class="g-wall">
+        <div class="g-filters" role="toolbar" aria-label="Filter the gallery">
+            <button class="chip is-on" data-filter="all">All</button>
+            <button class="chip" data-filter="scene">Scenes</button>
+            <button class="chip" data-filter="character">Characters</button>
+            <button class="chip" data-filter="manga" id="manga">Manga</button>
+            <button class="chip" data-filter="cut">Cut-outs</button>
+            <button class="chip" data-filter="calm">Calm</button>
+            <button class="chip" data-filter="loud">Loud</button>
+            <button class="chip chip--icon" data-shuffle aria-label="Shuffle the gallery"><i class="ph ph-shuffle"></i>Shuffle</button>
+        </div>
+        <div class="g-grid" data-grid></div>
+    </section>
+
+    <section class="g-end">
+        <h2>Like what you see?</h2>
+        <p>Every one of these lives inside Shiori, on your own computer.</p>
+        <a class="btn btn--primary" data-download data-magnet href="docs.html#install"><i class="ph ph-download-simple"></i>Download</a>
+    </section>
+</main>
+
+<!-- Lightbox: grows out of the clicked picture. Arrow keys move, Escape closes. -->
+<dialog class="lb" data-lb aria-label="Image viewer">
+    <img class="lb__img" data-lb-img alt="" />
+    <button class="lb__btn lb__close" data-lb-close aria-label="Close"><i class="ph ph-x"></i></button>
+    <button class="lb__btn lb__prev" data-lb-prev aria-label="Previous"><i class="ph ph-caret-left"></i></button>
+    <button class="lb__btn lb__next" data-lb-next aria-label="Next"><i class="ph ph-caret-right"></i></button>
+    <p class="lb__count" data-lb-count></p>
+</dialog>
+
+<footer class="foot">
+    <div class="foot__brand"><img src="assets/logo.png" alt="" width="48" height="48" /><p>Shiori, maintained by Zaxxewu. Characters and artwork belong to their creators; collected as mood pieces.</p></div>
+    <nav aria-label="Footer"><a href="./">Home</a><a href="docs.html">Docs</a><a href="legal.html">Legal</a><a href="pop.html">Pop version</a></nav>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/gallery-data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="assets/js/gallery.js"></script>
+</body>
+</html>
