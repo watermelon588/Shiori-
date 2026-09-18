@@ -13,3 +13,7 @@ dist/
 build/
 logs/
 .DS_Store
+
+# Local tooling and the owner's original art drop (processed copies live in site/assets)
+.claude/
+art-source/
