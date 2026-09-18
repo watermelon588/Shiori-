@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Demo · Shiori</title>
+    <meta name="description" content="Watch Shiori: the 20-second launch film and a 60-second tour of every screen." />
+    <meta property="og:title" content="Watch Shiori" />
+    <meta property="og:description" content="The launch film and a tour of every screen." />
+    <meta property="og:image" content="https://shiori-dusky.vercel.app/assets/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#f6f8fb" />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+    <link rel="stylesheet" href="assets/css/nagi.css" />
+    <link rel="stylesheet" href="assets/css/nagi-art.css" />
+</head>
+<body>
+<header class="nav is-stuck">
+    <a class="brand" href="./" aria-label="Shiori home"><img src="assets/logo.png" alt="" width="36" height="36" /><span>Shiori</span></a>
+    <nav aria-label="Primary"><a href="./">Home</a><a href="gallery.html">Gallery</a><a href="docs.html">Docs</a><a href="./#support">Support</a></nav>
+    <div class="nav__end"><a class="btn btn--primary btn--sm" data-download href="docs.html#install"><i class="ph ph-download-simple"></i>Download</a></div>
+</header>
+
+<main class="films">
+    <h1>Watch Shiori.</h1>
+    <p class="films__lead">Twenty seconds for the feeling, sixty for every screen.</p>
+
+    <!-- Each card is its own thumbnail; the video only loads after a click. -->
+    <button class="film film--lead" data-film="assets/launch.mp4" aria-label="Play the launch film">
+        <img src="assets/hero/h1.webp" alt="" />
+        <span class="film__play"><i class="ph-fill ph-play"></i></span>
+        <span class="film__meta"><b>The launch film</b><span>20 seconds</span></span>
+    </button>
+
+    <button class="film" data-film="assets/demo.mp4" aria-label="Play the tour of every screen">
+        <img src="assets/shots/home-nagi.webp" alt="" />
+        <span class="film__play"><i class="ph-fill ph-play"></i></span>
+        <span class="film__meta"><b>A tour of every screen</b><span>60 seconds</span></span>
+    </button>
+
+    <div class="films__end">
+        <a class="btn btn--primary" data-download href="docs.html#install"><i class="ph ph-download-simple"></i>Download</a>
+        <a class="link" href="./">Back to the home page <i class="ph ph-arrow-right"></i></a>
+    </div>
+</main>
+
+<footer class="foot">
+    <div class="foot__brand"><img src="assets/logo.png" alt="" width="48" height="48" /><p>Shiori, maintained by Zaxxewu. Built on <a href="https://github.com/5rahim/seanime" rel="noreferrer">Seanime</a> (GPL-3.0).</p></div>
+    <nav aria-label="Footer"><a href="./">Home</a><a href="gallery.html">Gallery</a><a href="docs.html">Docs</a><a href="legal.html">Legal</a></nav>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script>
+    // Swap a thumbnail for its video on click, and pause any other film that is playing.
+    document.querySelectorAll("[data-film]").forEach(card => card.addEventListener("click", () => {
+        document.querySelectorAll(".films video").forEach(v => v.pause())
+        const video = document.createElement("video")
+        Object.assign(video, { src: card.dataset.film, controls: true, autoplay: true, playsInline: true })
+        video.className = card.className.replace("film", "film film--on")
+        card.replaceWith(video)
+    }))
+</script>
+</body>
+</html>

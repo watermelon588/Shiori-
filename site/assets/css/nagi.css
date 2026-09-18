@@ -175,17 +175,23 @@ section { padding: clamp(5rem, 11vw, 9rem) clamp(1.25rem, 5vw, 4.5rem); }
 .cast__row img:nth-child(odd) { rotate: -3deg; }
 .cast__row img:nth-child(even) { rotate: 3deg; }
 
-/* ------------------------------------------------------------------ demo */
-.demo { display: grid; gap: 2.5rem; justify-items: center; text-align: center; }
-.demo__frame { position: relative; width: min(1100px, 100%); aspect-ratio: 16 / 9; border-radius: var(--r); overflow: hidden; background: var(--ink); box-shadow: var(--shadow); }
-.demo__frame > img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: blur(3px) saturate(0.9); opacity: 0.6; }
-.demo__frame video, .demo__frame iframe { width: 100%; height: 100%; border: 0; }
-.demo__soon { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 1rem; color: #fff; }
-.demo__play { display: grid; place-items: center; width: 5.5rem; height: 5.5rem; border-radius: 999px; background: var(--accent); font-size: 2rem; box-shadow: 0 0 0 12px rgb(36 92 255 / 0.25); }
-.demo__soon p { font-weight: 700; text-shadow: 0 2px 12px rgb(0 0 0 / 0.5); }
-.launch-film { width: min(1100px, 100%); display: grid; gap: 0.8rem; justify-items: center; }
-.launch-film p { font-weight: 700; color: var(--muted); }
-.launch-film video { width: 100%; aspect-ratio: 16 / 9; border-radius: var(--r); background: var(--ink); box-shadow: var(--shadow); }
+/* ------------------------------------------------------------------ demo page: thumbnail cards that turn into players */
+.films { display: grid; gap: 1.5rem; justify-items: center; padding-top: 8rem; text-align: center; }
+.films h1 { font-size: clamp(2.4rem, 5vw, 4rem); }
+.films__lead { color: var(--ink-2); margin-bottom: 1rem; }
+.film { position: relative; width: min(1100px, 100%); aspect-ratio: 16 / 9; padding: 0; border: 0; border-radius: var(--r); overflow: hidden; cursor: pointer; background: var(--ink); box-shadow: var(--shadow), 0 0 0 1px var(--line); }
+.film:not(.film--lead) { width: min(860px, 100%); }
+.film img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 700ms var(--ease); }
+.film::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgb(10 16 32 / 0.7), rgb(10 16 32 / 0) 55%); }
+.film__play { position: absolute; z-index: 1; left: 50%; top: 50%; translate: -50% -50%; display: grid; place-items: center; width: 5.5rem; height: 5.5rem; border-radius: 999px; background: var(--accent); color: #fff; font-size: 2rem; box-shadow: 0 0 0 12px rgb(36 92 255 / 0.25); transition: transform 250ms var(--ease); }
+.film__meta { position: absolute; z-index: 1; left: 1.6rem; bottom: 1.3rem; display: grid; text-align: left; color: #fff; }
+.film__meta b { font-family: var(--display); font-size: clamp(1.2rem, 2.4vw, 1.8rem); }
+.film__meta span { color: rgb(255 255 255 / 0.8); font-size: 0.95rem; }
+.film:active .film__play { transform: scale(0.96); }
+@media (hover: hover) and (pointer: fine) { .film:hover img { transform: scale(1.03); } .film:hover .film__play { transform: scale(1.08); } }
+.film--on { display: block; object-fit: contain; cursor: auto; }
+.films__end { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; justify-content: center; margin-top: 1.5rem; }
+@media (prefers-reduced-motion: reduce) { .film img, .film__play { transition: none; } }
 
 /* ------------------------------------------------------------------ install */
 .install { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
