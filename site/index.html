@@ -7,7 +7,10 @@
     <meta name="description" content="Shiori is a private anime and manga hub that runs on your own computer. Stream, download single episodes or whole seasons, track with AniList. No ads, no accounts." />
     <meta property="og:title" content="Shiori · your anime, kept like a bookmark" />
     <meta property="og:description" content="A private anime and manga hub that runs on your own computer. No ads, no accounts." />
-    <meta property="og:image" content="assets/hero/h1.webp" />
+    <meta property="og:image" content="https://shiori-dusky.vercel.app/assets/og.jpg" />
+    <meta property="og:url" content="https://shiori-dusky.vercel.app/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://shiori-dusky.vercel.app/assets/og.jpg" />
     <meta name="theme-color" content="#f6f8fb" />
     <link rel="icon" href="favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -58,7 +61,7 @@
             <p class="hero__sub" data-rise>A private anime and manga hub that runs on your own computer. Stream, download, track. No ads, no accounts.</p>
             <div class="hero__ctas" data-rise>
                 <a class="btn btn--primary" data-download data-magnet href="#install"><i class="ph ph-download-simple"></i>Download</a>
-                <a class="btn btn--ghost" data-magnet href="#demo"><i class="ph-fill ph-play"></i>Watch the demo</a>
+                <a class="btn btn--ghost" data-magnet href="demo.html"><i class="ph-fill ph-play"></i>Watch the demo</a>
             </div>
         </div>
         <div class="hero__thumbs" data-rise role="group" aria-label="Choose a still">
@@ -253,17 +256,6 @@
         </div>
     </section>
 
-    <!-- Demo video slot: config.js swaps the poster for the real video. -->
-    <section id="demo" class="demo">
-        <h2 data-rise>Sixty seconds of Shiori.</h2>
-        <div class="demo__frame" data-demo>
-            <img src="assets/hero/a158.webp" alt="" loading="lazy" />
-            <div class="demo__soon">
-                <span class="demo__play"><i class="ph-fill ph-play"></i></span>
-                <p>The demo video is on its way.</p>
-            </div>
-        </div>
-    </section>
 
     <!-- Install: three verbs, one command each. -->
     <section id="install" class="install">
@@ -322,6 +314,7 @@
     </div>
     <nav aria-label="Footer">
         <a href="gallery.html">Gallery</a>
+        <a href="demo.html">Demo</a>
         <a href="docs.html">Docs</a>
         <a href="legal.html#privacy">Privacy</a>
         <a href="legal.html#terms">Terms</a>
