@@ -36,6 +36,8 @@ Shiori (栞)/
 
 ## 3. Run it
 
+Daily use: double-click `start-shiori.cmd` in the repo root (or run it from a terminal). It starts `seanime/seanime-shiori.exe` with `seanime/dev-datadir` and opens http://localhost:43000; if Shiori is already running it just opens the browser.
+
 ```bash
 # Go server (the data dir MUST be an absolute path)
 seanime/seanime.exe --datadir "C:/path/to/Shiori (栞)/seanime/dev-datadir"
