@@ -183,6 +183,9 @@ section { padding: clamp(5rem, 11vw, 9rem) clamp(1.25rem, 5vw, 4.5rem); }
 .demo__soon { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 1rem; color: #fff; }
 .demo__play { display: grid; place-items: center; width: 5.5rem; height: 5.5rem; border-radius: 999px; background: var(--accent); font-size: 2rem; box-shadow: 0 0 0 12px rgb(36 92 255 / 0.25); }
 .demo__soon p { font-weight: 700; text-shadow: 0 2px 12px rgb(0 0 0 / 0.5); }
+.launch-film { width: min(1100px, 100%); display: grid; gap: 0.8rem; justify-items: center; }
+.launch-film p { font-weight: 700; color: var(--muted); }
+.launch-film video { width: 100%; aspect-ratio: 16 / 9; border-radius: var(--r); background: var(--ink); box-shadow: var(--shadow); }
 
 /* ------------------------------------------------------------------ install */
 .install { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }

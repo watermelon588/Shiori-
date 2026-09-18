@@ -4,7 +4,11 @@ window.SHIORI_SITE = {
     downloadUrl: "https://github.com/watermelon588/Shiori-/releases/latest/download/Shiori-windows-x64.zip",
     githubUrl: "https://github.com/watermelon588/Shiori-",
     // Drop a file at assets/demo.mp4 (and set this to "assets/demo.mp4") or paste a YouTube embed URL.
-    demoVideo: "",
+    demoVideo: "assets/demo.mp4",
+    demoPoster: "assets/demo.jpg",
+    // The 20-second launch film, shown under the demo when set.
+    launchVideo: "assets/launch.mp4",
+    launchPoster: "assets/launch.jpg",
     supportEmail: "maityrohit021@gmail.com",
     upiId: "maityrohit021@oksbi",
     maintainer: "Zaxxewu",
@@ -35,7 +39,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const isEmbed = /youtube|youtu\.be|vimeo/.test(s.demoVideo)
         slot.innerHTML = isEmbed
             ? `<iframe src="${s.demoVideo}" title="Shiori demo" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`
-            : `<video src="${s.demoVideo}" controls playsinline preload="metadata"></video>`
+            : `<video src="${s.demoVideo}" controls playsinline preload="metadata"${s.demoPoster ? ` poster="${s.demoPoster}"` : ""}></video>`
         slot.classList.add("has-video")
+    }
+    // Launch film: a second player right after the demo frame.
+    const anchor = slot && slot.closest(".demo__frame, .tv__set")
+    if (anchor && s.launchVideo) {
+        const film = document.createElement("div")
+        film.className = "launch-film"
+        film.innerHTML = `<p>The 20-second launch film</p><video src="${s.launchVideo}" controls playsinline preload="metadata"${s.launchPoster ? ` poster="${s.launchPoster}"` : ""}></video>`
+        anchor.insertAdjacentElement("afterend", film)
     }
 })
