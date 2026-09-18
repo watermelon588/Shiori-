@@ -163,6 +163,9 @@ section { padding: clamp(4.5rem, 10vw, 8rem) clamp(1.25rem, 5vw, 4.5rem); }
 .tv__knobs { display: grid; align-content: end; gap: 1rem; }
 .tv__knobs span { width: 2.6rem; height: 2.6rem; border-radius: 999px; background: var(--yellow); border: var(--edge); }
 @media (max-width: 600px) { .tv__set { grid-template-columns: 1fr; } .tv__knobs { display: none; } }
+.launch-film { width: min(1000px, 100%); margin-top: 2rem; display: grid; gap: 0.8rem; justify-items: center; }
+.launch-film p { font-family: var(--sticker); font-size: 1.2rem; }
+.launch-film video { width: 100%; aspect-ratio: 16 / 9; border: var(--edge); border-radius: 22px; background: var(--ink); box-shadow: 10px 10px 0 var(--ink); }
 
 /* ------------------------------------------------------------------ receipt checkout */
 .checkout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }

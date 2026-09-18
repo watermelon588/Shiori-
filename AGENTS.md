@@ -72,6 +72,7 @@ Checks before calling frontend work done: `cd seanime/seanime-web && npx tsc --n
 | Donations | `/public/support`, configured in `src/lib/shiori/support.ts` (all methods empty → "not open yet"). Setup and risks: `docs/shiori/13-DONATIONS.md` |
 | Secrets file | The server reads `<data dir>/.env` at startup (`SEANIME_SERVER_PASSWORD`, `SEANIME_SECURE_MODE`); template in `seanime/.env.example`. `dev-datadir/` is git-ignored |
 | Guide | `/guide` (sidebar → Guide): in-app manual for users + developers, screenshots in `public/shiori/guide/*.webp` (re-shoot with `scripts/capture-ui.mjs`, convert to webp) |
+| Launch video | `brag-output/brag.mp4` (20 s, 1920×1080, `/brag` + Hyperframes; source in `brag-output/composition/`, re-render with `npx hyperframes render --quality delivery --output ../brag.mp4`). Plain 60 s app demo: `brag-output-demo/demo.mp4` (full-page captures of every page panned in ffmpeg, captions, no audio; how-to in `brag-output-demo/README.md`). Not yet copied to `site/assets/demo.mp4` / `config.js → demoVideo` |
 | Owner art | 178 curated images in `seanime-web/public/shiori/art` (30 cut-outs), built by `scripts/build-art.py` from `art-source/` |
 
 Full provider details are in `docs/shiori/08-PROVIDERS.md`.
