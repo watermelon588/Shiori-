@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Docs · Shiori</title>
+    <meta name="description" content="Install Shiori, set a password, set up downloads and the auto downloader, reach it from your phone, or build it from source." />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+    <link rel="stylesheet" href="assets/css/nagi.css" />
+    <link rel="stylesheet" href="assets/css/docs.css" />
+</head>
+<body class="docs-page">
+<header class="nav is-stuck">
+    <a class="brand" href="./" aria-label="Shiori home"><img src="assets/logo.png" alt="" width="36" height="36" /><span>Shiori</span></a>
+    <nav aria-label="Primary"><a href="./">Home</a><a href="gallery.html">Gallery</a><a href="docs.html" aria-current="page">Docs</a><a href="legal.html">Legal</a><a href="./#support">Support</a></nav>
+    <div class="nav__end"><a class="btn btn--primary btn--sm" data-download href="#install"><i class="ph ph-download-simple"></i>Download</a></div>
+</header>
+
+<div class="docs">
+    <nav class="docs__toc" aria-label="On this page">
+        <p>Start</p>
+        <a href="#what">What Shiori is</a>
+        <a href="#install">Install</a>
+        <a href="#password">Set a password</a>
+        <a href="#first-run">First run</a>
+        <p>Use it</p>
+        <a href="#watch">Watch online</a>
+        <a href="#torrents">Set up downloads</a>
+        <a href="#one">One episode</a>
+        <a href="#season">A whole season</a>
+        <a href="#auto">Auto downloader</a>
+        <a href="#manga">Manga</a>
+        <a href="#phone">On your phone</a>
+        <p>More</p>
+        <a href="#source">Build from source</a>
+        <a href="#trouble">Troubleshooting</a>
+    </nav>
+
+    <article class="docs__body">
+        <h1>Docs</h1>
+        <p class="lead">From a fresh download to your first episode, then everything after. The same guide ships inside the app under Guide.</p>
+
+        <section id="what">
+            <h2>What Shiori is</h2>
+            <p>Shiori is one program that runs on your own computer and opens in your browser. It streams anime, downloads single episodes or whole seasons, reads manga, and syncs your progress with AniList. It hosts no media itself and there is no Shiori account: your copy, your password, your folders.</p>
+            <figure><img src="assets/shots/home-nagi.webp" alt="Shiori's home screen" loading="lazy" /></figure>
+        </section>
+
+        <section id="install">
+            <h2>Install</h2>
+            <ol class="steps">
+                <li>Download the latest release zip for Windows and unzip it into a folder you keep, for example <code>C:\Apps\Shiori</code>.</li>
+                <li>Create a data folder for Shiori, for example <code>C:\Users\you\Shiori</code>. Your settings and database live there.</li>
+                <li>Double-click <code>Start Shiori.bat</code> (it keeps your data in a <code>data</code> folder next to it), or start it from a terminal with your own data folder:
+                    <pre><code>.\shiori.exe --datadir "C:/Users/you/Shiori"</code></pre></li>
+                <li>Open <b>http://localhost:43000</b> in your browser.</li>
+            </ol>
+            <p class="note">macOS and Linux: build from source (below). The same commands work with <code>/</code> paths.</p>
+        </section>
+
+        <section id="password">
+            <h2>Set a password</h2>
+            <p>Without a password, anyone who can reach your computer on the network can control Shiori. Set one before anything else. Copy <code>.env.example</code> into your data folder as <code>.env</code>:</p>
+            <pre><code>SEANIME_SERVER_PASSWORD=pick-a-long-random-password
+SEANIME_SECURE_MODE=strict</code></pre>
+            <p>Restart Shiori. The login page now asks for that password on every new device. Ten wrong tries lock a device out for five minutes.</p>
+            <figure><img src="assets/shots/settings.webp" alt="Settings" loading="lazy" /></figure>
+        </section>
+
+        <section id="first-run">
+            <h2>First run</h2>
+            <ol class="steps">
+                <li><b>Library folder:</b> Settings, Local Anime Library. Choose where downloaded episodes go. Pick a drive with room: a season is roughly 4 to 15 GB.</li>
+                <li><b>AniList (optional):</b> create a free account at anilist.co, then the account button at the bottom of the sidebar, Log in with AniList. Progress and lists sync from then on.</li>
+                <li><b>Sources:</b> Extensions, Marketplace. Install the streaming, torrent and manga sources you want. Shiori ships with none.</li>
+            </ol>
+        </section>
+
+        <section id="watch">
+            <h2>Watch online</h2>
+            <p>Open any anime. It lands on Watch online, the player on top and the episodes below. Pick an episode and it streams. If a source fails, Shiori moves to the next one; you can also pick a source yourself.</p>
+            <figure><img src="assets/shots/entry.webp" alt="An anime page on Watch online" loading="lazy" /></figure>
+        </section>
+
+        <section id="torrents">
+            <h2>Set up downloads</h2>
+            <p>Downloading needs a torrent source (where to search) and a client (what downloads).</p>
+            <ol class="steps">
+                <li>Settings, Torrent Provider: pick a default source, for example AnimeTosho.</li>
+                <li>Settings, Torrent Client: choose the built-in client (nothing else to install) or qBittorrent / Transmission.</li>
+                <li>Save both, then restart Shiori once after changing the client.</li>
+            </ol>
+        </section>
+
+        <section id="one">
+            <h2>Download one episode</h2>
+            <p>Every episode in every list has a download icon. Press it: a drawer opens already searching for that episode. Pick a release (more seeders means faster), press Download. Follow it on the Downloads page.</p>
+            <figure><img src="assets/shots/downloads.webp" alt="The Downloads page" loading="lazy" /></figure>
+        </section>
+
+        <section id="season">
+            <h2>Download a whole season</h2>
+            <p>On the anime page press Download batch under the cover. For finished seasons Shiori looks for batch releases, one torrent with every episode. Untick files you do not want.</p>
+        </section>
+
+        <section id="auto">
+            <h2>Auto downloader</h2>
+            <p>Auto downloader, New Rule: choose an airing show, the release group you trust and the resolution. Shiori checks every 20 minutes and downloads new episodes into your library. Nothing downloads unless a rule matches.</p>
+            <figure><img src="assets/shots/auto-downloader.webp" alt="The auto downloader" loading="lazy" /></figure>
+        </section>
+
+        <section id="manga">
+            <h2>Manga</h2>
+            <p>Add a manga to your list or open one from Discover. Chapters load from a manga source; switch source if some are missing. Tick chapters and press Download to read offline.</p>
+        </section>
+
+        <section id="phone">
+            <h2>On your phone</h2>
+            <p>Never forward port 43000 on your router. Install <a href="https://tailscale.com" rel="noreferrer">Tailscale</a> on your computer and your phone, then open your computer's Tailscale address. Add it to your home screen for an app-like window.</p>
+            <figure class="narrow"><img src="assets/shots/mobile-nagi.webp" alt="Shiori on a phone" loading="lazy" /></figure>
+        </section>
+
+        <section id="source">
+            <h2>Build from source</h2>
+            <p>Needs Git, Node.js 22+ and Go 1.26+.</p>
+            <pre><code>git clone &lt;repository-url&gt; shiori
+cd shiori/seanime/seanime-web
+npm ci
+npm run build
+cd ..
+cp -r seanime-web/out/. web/
+CGO_ENABLED=0 go build -o shiori -trimpath -ldflags="-s -w" -tags=nosystray .
+./shiori --datadir "$HOME/Shiori"</code></pre>
+        </section>
+
+        <section id="trouble">
+            <h2>Troubleshooting</h2>
+            <details><summary>An episode will not play</summary><p>Try another source from the picker, or use Manual match: the source may have matched a different season.</p></details>
+            <details><summary>A download finished but the show shows 0 episodes</summary><p>Run Scan from Home, then check Scan summaries for files that did not match.</p></details>
+            <details><summary>My password is rejected</summary><p>Shiori reads the password only at start. Restart it after editing .env. After ten wrong tries, wait five minutes.</p></details>
+            <details><summary>My lists and the schedule are empty</summary><p>Connect AniList from the account button at the bottom of the sidebar.</p></details>
+        </section>
+    </article>
+</div>
+
+<footer class="foot">
+    <div class="foot__brand"><img src="assets/logo.png" alt="" width="48" height="48" /><p>Shiori, maintained by Zaxxewu. Built on <a href="https://github.com/5rahim/seanime" rel="noreferrer">Seanime</a> (GPL-3.0).</p></div>
+    <nav aria-label="Footer"><a href="./">Home</a><a href="legal.html#privacy">Privacy</a><a href="legal.html#terms">Terms</a><a data-email href="#">Email</a></nav>
+</footer>
+<script src="assets/js/config.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+/* ==========================================================================================
+ * Nagi, the art layer: grain, hero thumbnails, still wall, seasons, cast field,
+ * manga columns, 3D gallery wall, hover tilt and magnetic buttons. Loaded after nagi.css.
+ * ======================================================================================== */
+
+/* Fine film grain over everything: hides upscaling softness in the big plates. Fixed + no pointer events,
+   so it never repaints with scroll. */
+body::after {
+    content: ""; position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ------------------------------------------------------------------ hero: ken burns + thumbnails */
+.hero__still { transform: scale(1.12); transition: opacity 1.6s ease, transform 9s linear; }
+.hero__still.is-on { transform: scale(1); }
+.hero__thumbs {
+    position: absolute; z-index: 3; right: clamp(1.25rem, 4vw, 3rem); bottom: clamp(3rem, 9vh, 6rem);
+    display: flex; gap: 0.5rem; padding: 0.5rem; border-radius: 16px;
+    background: rgb(255 255 255 / 0.55); backdrop-filter: blur(14px); box-shadow: 0 0 0 1px rgb(255 255 255 / 0.6), 0 18px 40px -24px rgb(20 40 90 / 0.6);
+}
+.hero__thumbs button { position: relative; width: 3.4rem; height: 2.4rem; padding: 0; border: 0; border-radius: 9px; overflow: hidden; cursor: pointer; opacity: 0.55; transition: opacity 200ms ease, transform 200ms var(--ease); }
+.hero__thumbs button img { width: 100%; height: 100%; object-fit: cover; }
+.hero__thumbs button.is-on { opacity: 1; box-shadow: 0 0 0 2px var(--accent); }
+.hero__thumbs button::after { content: ""; position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; }
+.hero__thumbs button.is-on::after { animation: thumbfill 7s linear forwards; }
+@keyframes thumbfill { to { transform: scaleX(1); } }
+@media (hover: hover) and (pointer: fine) { .hero__thumbs button:hover { opacity: 1; transform: translateY(-2px); } }
+@media (max-width: 900px) { .hero__thumbs { display: none; } }
+
+/* ------------------------------------------------------------------ still wall (static composition) */
+.zoom { position: relative; padding: 0; }
+.zoom__sticky { position: relative; height: max(112vh, 720px); overflow: hidden; }
+.zoom__img { position: absolute; inset: 0; margin: 0; display: grid; place-items: center; pointer-events: none; }
+.zoom__img img { object-fit: cover; border-radius: 14px; box-shadow: 0 30px 60px -30px rgb(20 40 90 / 0.55); }
+.zoom__img--c img { width: 25vw; height: 25vh; }
+.zoom__img--1 img { width: 35vw; height: 30vh; translate: 5vw -30vh; }
+.zoom__img--2 img { width: 20vw; height: 45vh; translate: -25vw -10vh; }
+.zoom__img--3 img { width: 25vw; height: 25vh; translate: 27.5vw 0; }
+.zoom__img--4 img { width: 20vw; height: 25vh; translate: 5vw 27.5vh; }
+.zoom__img--5 img { width: 30vw; height: 25vh; translate: -22.5vw 27.5vh; }
+.zoom__img--6 img { width: 15vw; height: 15vh; translate: 25vw 22.5vh; }
+.zoom__line {
+    position: absolute; left: 50%; bottom: 1.5rem; translate: -50% 0; z-index: 2;
+    padding: 0.7rem 1.4rem; border-radius: 999px; background: rgb(255 255 255 / 0.75); backdrop-filter: blur(12px);
+    font-family: var(--display); font-weight: 700; font-size: clamp(1rem, 2vw, 1.4rem); white-space: nowrap;
+}
+@media (max-width: 860px) {
+    .zoom { height: auto; padding: 4rem 1.25rem; }
+    .zoom__sticky { position: static; height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; overflow: visible; }
+    .zoom__img { position: static; }
+    .zoom__img img, .zoom__img--c img, .zoom__img--1 img, .zoom__img--2 img, .zoom__img--3 img, .zoom__img--4 img, .zoom__img--5 img, .zoom__img--6 img { width: 100%; height: 11rem; translate: none; }
+    .zoom__img--c { grid-column: span 2; }
+    .zoom__line { position: static; translate: none; opacity: 1; grid-column: span 2; justify-self: center; white-space: normal; text-align: center; }
+}
+
+/* ------------------------------------------------------------------ seasons */
+.seasons { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: clamp(2rem, 5vw, 5rem); }
+.seasons__rail { position: sticky; top: 110px; align-self: start; display: grid; gap: 1.6rem; }
+.seasons__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.3rem; }
+.seasons__list li { display: flex; align-items: baseline; gap: 1rem; font-family: var(--display); font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.6rem); color: rgb(20 26 38 / 0.2); transition: color 300ms ease, transform 400ms var(--ease); }
+.seasons__list li span { font-size: 0.8em; width: 1.4em; }
+.seasons__list li.is-on { color: var(--ink); transform: translateX(0.5rem); }
+.seasons__list li.is-on span { color: var(--accent); }
+.seasons__note { color: var(--ink-2); max-width: 26rem; }
+.seasons__flow { display: grid; gap: clamp(5rem, 10vw, 9rem); }
+.seasons__group { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1.25rem; align-items: start; }
+.plate { margin: 0; border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); transform-style: preserve-3d; will-change: transform; }
+.plate img { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease); }
+.plate--tall { grid-column: span 3; aspect-ratio: 3 / 4; }
+.plate--wide { grid-column: span 6; aspect-ratio: 16 / 9; }
+.plate--offset { grid-column: 4 / span 3; aspect-ratio: 4 / 5; margin-top: 30%; }
+@media (hover: hover) and (pointer: fine) { .plate:hover img { transform: scale(1.06); } }
+@media (max-width: 860px) {
+    .seasons { grid-template-columns: 1fr; }
+    .seasons__rail { position: static; }
+    .seasons__list { grid-auto-flow: column; overflow-x: auto; }
+    .seasons__list li { font-size: 1.4rem; }
+}
+
+/* ------------------------------------------------------------------ cast field */
+.cast-field { position: relative; text-align: center; display: grid; justify-items: center; gap: 1rem; overflow: hidden; background: radial-gradient(ellipse at 50% 60%, var(--haze), transparent 70%); }
+.cast-field p { color: var(--ink-2); max-width: 36rem; }
+.cast-field__stage { position: relative; width: 100%; height: clamp(26rem, 60vw, 44rem); margin-top: 2rem; }
+.figure {
+    position: absolute; bottom: 0; height: var(--h); will-change: transform;
+    filter: drop-shadow(0 22px 20px rgb(20 40 90 / 0.28));
+    transition: filter 300ms ease;
+}
+.figure img { height: 100%; width: auto; max-width: none; transition: transform 500ms var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+    .figure:hover { filter: drop-shadow(0 30px 26px rgb(36 92 255 / 0.35)); z-index: 20; }
+    .figure:hover img { transform: translateY(-14px) scale(1.04); }
+}
+
+/* ------------------------------------------------------------------ manga columns */
+.ink { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; overflow: hidden; background: #0f131c; color: #eef2f8; }
+.ink__copy { display: grid; gap: 1.2rem; justify-items: start; }
+.ink__copy p { color: rgb(238 242 248 / 0.7); }
+.ink .link { color: #8fb0ff; }
+.ink__cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; height: 110vh; margin-block: -10vh; }
+.ink__col { display: grid; gap: 1rem; align-content: start; will-change: transform; }
+.ink__col img { width: 100%; border-radius: 10px; filter: grayscale(1) contrast(1.05); opacity: 0.9; transition: filter 400ms ease, opacity 300ms ease, transform 400ms var(--ease); }
+@media (hover: hover) and (pointer: fine) { .ink__col img:hover { opacity: 1; transform: scale(1.03); filter: grayscale(0) contrast(1.05); } }
+@media (max-width: 860px) { .ink { grid-template-columns: 1fr; } .ink__cols { grid-template-columns: repeat(2, 1fr); height: 70vh; margin-block: 0; overflow: hidden; border-radius: 14px; } .cast-field__stage { height: 22rem; margin-top: 1rem; } }
+
+/* ------------------------------------------------------------------ 3D gallery wall */
+.wall3d { position: relative; display: grid; gap: 3rem; justify-items: center; text-align: center; overflow: hidden; perspective: 1600px; }
+.wall3d__copy { display: grid; gap: 1rem; justify-items: center; }
+.wall3d__copy p { color: var(--ink-2); }
+.wall3d__plane { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0.8rem; width: min(1500px, 120vw); transform-origin: 50% 0; transform-style: preserve-3d; }
+.wall3d__plane a { display: block; aspect-ratio: 3 / 4; border-radius: 12px; overflow: hidden; box-shadow: 0 16px 30px -18px rgb(20 40 90 / 0.5); transition: transform 350ms var(--ease), box-shadow 350ms ease; }
+.wall3d__plane img { width: 100%; height: 100%; object-fit: cover; }
+@media (hover: hover) and (pointer: fine) { .wall3d__plane a:hover { transform: translateZ(40px) scale(1.06); box-shadow: 0 30px 50px -20px rgb(36 92 255 / 0.5); } }
+@media (max-width: 860px) { .wall3d__plane { grid-template-columns: repeat(4, 1fr); width: 100%; } }
+
+/* ------------------------------------------------------------------ micro-interactions */
+[data-hover3d] { transform-style: preserve-3d; }
+.btn { position: relative; overflow: hidden; }
+.btn--primary::before {
+    content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.45) 50%, transparent 70%);
+    transform: translateX(-120%); transition: transform 700ms var(--ease);
+}
+@media (hover: hover) and (pointer: fine) { .btn--primary:hover::before { transform: translateX(120%); } }
+.link { background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat; padding-bottom: 2px; transition: background-size 350ms var(--ease); }
+@media (hover: hover) and (pointer: fine) { .link:hover { background-size: 100% 2px; } }
+.nav nav a { position: relative; }
+.stack__card img, .pan__track img, .reveal__device img { transition: transform 700ms var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+    .pan__track figure:hover img { transform: translateY(-6px); }
+    .cast__row img { transition: transform 400ms var(--ease); }
+    .cast__row img:hover { transform: scale(1.1) rotate(0deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero__still, .hero__still.is-on { transform: none; transition: opacity 0.4s ease; }
+    .hero__thumbs button.is-on::after { animation: none; transform: scaleX(1); }
+    .plate img, .figure img, .ink__col img, .wall3d__plane a { transition: none; }
+}

@@ -1,0 +1,36 @@
+/* Docs and legal pages: reading layout on top of nagi.css tokens. */
+.docs-page .nav { position: sticky; }
+.nav nav a[aria-current="page"] { color: var(--accent); background: rgb(36 92 255 / 0.1); }
+.btn--sm { height: 2.5rem; padding: 0 1.1rem; font-size: 0.9rem; }
+
+.docs { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); max-width: 78rem; margin: 0 auto; padding: 3rem clamp(1.25rem, 5vw, 3rem) 5rem; }
+.docs__toc { position: sticky; top: 96px; align-self: start; display: grid; gap: 0.15rem; font-size: 0.92rem; }
+.docs__toc p { margin-top: 1rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.docs__toc p:first-child { margin-top: 0; }
+.docs__toc a { padding: 0.3rem 0.7rem; border-radius: 10px; color: var(--ink-2); }
+@media (hover: hover) and (pointer: fine) { .docs__toc a:hover { background: rgb(20 26 38 / 0.05); } }
+
+.docs__body { display: grid; gap: 3.5rem; max-width: 46rem; }
+.docs__body h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 900; }
+.docs__body .lead { margin-top: -2.5rem; font-size: 1.1rem; color: var(--ink-2); }
+.docs__body section { display: grid; gap: 1rem; padding: 0; scroll-margin-top: 96px; }
+.docs__body h2 { font-size: 1.7rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+.docs__body p, .docs__body li { color: var(--ink-2); }
+.docs__body b { color: var(--ink); }
+.docs__body a { color: var(--accent); font-weight: 700; }
+.docs__body :not(pre) > code { padding: 0.1rem 0.35rem; border-radius: 6px; background: rgb(20 26 38 / 0.06); }
+.docs__body pre { margin: 0.4rem 0 0; padding: 1rem 1.2rem; border-radius: 14px; background: var(--ink); color: #dfe6f3; overflow-x: auto; line-height: 1.7; }
+.docs__body figure { margin: 0.5rem 0 0; }
+.docs__body figure img { border-radius: 16px; box-shadow: var(--shadow), 0 0 0 1px var(--line); }
+.docs__body figure.narrow { max-width: 16rem; }
+.steps { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.7rem; }
+.note { padding: 0.8rem 1rem; border-radius: 12px; border-left: 3px solid var(--accent); background: rgb(36 92 255 / 0.06); font-size: 0.95rem; }
+.docs__body details { border-radius: 14px; background: var(--paper); box-shadow: 0 0 0 1px var(--line); }
+.docs__body summary { cursor: pointer; padding: 1rem 1.2rem; font-weight: 700; }
+.docs__body details p { padding: 0 1.2rem 1rem; }
+
+@media (max-width: 860px) {
+    .docs { grid-template-columns: 1fr; }
+    .docs__toc { position: static; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); }
+    .docs__toc p { grid-column: 1 / -1; }
+}
