@@ -46,6 +46,9 @@ cd seanime/seanime-web && npm run dev
 # Provider health check (server must be running)
 node scripts/test-providers.mjs            # or --only torrent|stream|manga
 
+# Portable Windows desktop release + site download
+powershell -ExecutionPolicy Bypass -File scripts/build-desktop.ps1
+
 # Production frontend (much smoother than the dev server; rebuild after UI changes)
 cd seanime/seanime-web && npm run build && cp -r out/. ../web/     # keeps web/assets (owner originals)
 ```
@@ -76,6 +79,7 @@ Checks before calling frontend work done: `cd seanime/seanime-web && npx tsc --n
 | Guide | `/guide` (sidebar → Guide): in-app manual for users + developers, screenshots in `public/shiori/guide/*.webp` (re-shoot with `scripts/capture-ui.mjs`, convert to webp) |
 | Launch video | `brag-output/brag.mp4` (20 s, 1920×1080, `/brag` + Hyperframes; source in `brag-output/composition/`, re-render with `npx hyperframes render --quality delivery --output ../brag.mp4`). Plain 60 s app demo: `brag-output-demo/demo.mp4` (full-page captures of every page panned in ffmpeg, captions, no audio; how-to in `brag-output-demo/README.md`). Not yet copied to `site/assets/demo.mp4` / `config.js → demoVideo` |
 | Owner art | 178 curated images in `seanime-web/public/shiori/art` (30 cut-outs), built by `scripts/build-art.py` from `art-source/` |
+| Desktop app | Portable Windows x64 tray app. First launch opens a loopback-only password setup, stores data in `%APPDATA%/Shiori`, enables strict mode, seeds the reviewed providers, **auto-creates a Desktop + Start-Menu "Shiori" shortcut** (`internal/server/desktop_shortcut_windows.go`, pure-Go shell COM — no installer, no powershell spawn) and opens `127.0.0.1:43000`; later launches are one click from that icon. Build: `scripts/build-desktop.ps1`; download: `site/downloads/Shiori-Windows-x64.zip` (79,057,527 bytes, sha256 `3bf39e3a…fbfe3ed`). Verified 2026-09-22: isolated packaged-exe run → loopback-only, 14 providers, strict mode, shortcut created, security probe 23/23 |
 
 Full provider details are in `docs/shiori/08-PROVIDERS.md`.
 

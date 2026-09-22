@@ -1,0 +1,6 @@
+Shiori is built on Seanime 3.10.2 and remains licensed under GPL-3.0.
+
+Upstream Seanime source:
+https://github.com/5rahim/seanime
+
+The complete corresponding Shiori source for this build is the seanime directory in the project that produced this archive. Keep this notice and LICENSE.txt with redistributed copies.

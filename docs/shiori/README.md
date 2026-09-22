@@ -18,5 +18,8 @@ Personal, local-only anime & manga hub built on a Seanime fork.
 | [09-DESIGN-DIRECTION](09-DESIGN-DIRECTION.md) | **Active**: the two built variants, Nagi and Ranbu |
 | [10-SKILLS](10-SKILLS.md) | The 74 vendored skills and when to use each |
 | [11-ART-PIPELINE](11-ART-PIPELINE.md) | How owner images are fixed, cut out and served |
+| [12-SECURITY](12-SECURITY.md) | Password boundary, hardening and the security probe |
+| [13-DONATIONS](13-DONATIONS.md) | Optional support page setup and risks |
+| [14-DESKTOP](14-DESKTOP.md) | Windows tray app, first-run password setup and release packaging |
 
 The older deep-dive, [`../SEANIME_ARCHITECTURE_ANALYSIS.md`](../SEANIME_ARCHITECTURE_ANALYSIS.md), is still accurate on internals. Note that it calls the frontend "Vite"; it is actually rsbuild/Rspack.

@@ -12,9 +12,16 @@ const img = (id, size = "sm") => `assets/g/${id}${size ? "." + size : ""}.webp`
 const shuffle = (list, seed = 7) => list.map((v, i) => [((i + 1) * 9301 + seed * 49297) % 233280, v]).sort((a, b) => a[0] - b[0]).map(p => p[1])
 
 // ---------------------------------------------------------------- page chrome
-// Nav gains a surface once content slides under it; the download pill appears once the hero button has left.
+// Nav gains a surface once content slides under it; the download pill appears once the hero button has left,
+// then steps aside while the full install call-to-action is already in view.
 ScrollTrigger.create({ start: 40, end: "max", onToggle: s => $("[data-nav]").classList.toggle("is-stuck", s.isActive) })
-ScrollTrigger.create({ trigger: "[data-hero]", start: "bottom 70%", end: "max", onToggle: s => $("[data-pill]").classList.toggle("is-shown", s.isActive) })
+{
+    const pill = $("[data-pill]")
+    let heroHasLeft = false, installIsVisible = false
+    const updatePill = () => pill.classList.toggle("is-shown", heroHasLeft && !installIsVisible)
+    ScrollTrigger.create({ trigger: "[data-hero]", start: "bottom 70%", end: "max", onToggle: s => { heroHasLeft = s.isActive; updatePill() } })
+    ScrollTrigger.create({ trigger: "#install", start: "top bottom", end: "bottom top", onToggle: s => { installIsVisible = s.isActive; updatePill() } })
+}
 
 // ---------------------------------------------------------------- hero stills + thumbnails
 {

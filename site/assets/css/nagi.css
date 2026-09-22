@@ -244,5 +244,6 @@ section { padding: clamp(5rem, 11vw, 9rem) clamp(1.25rem, 5vw, 4.5rem); }
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .hero__still, .pill, .btn, .link i { transition: none; }
-    .pill { transform: none; }
+    .pill { transform: translateY(160%); }
+    .pill.is-shown { transform: none; }
 }
