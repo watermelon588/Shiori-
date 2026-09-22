@@ -17,7 +17,13 @@ All release-blocking verification passed against the exact packaged ZIP:
 
 ## Desktop shortcut added — 2026-09-22
 
-Non-coder convenience: the packaged app now auto-creates a **Desktop + Start-Menu "Shiori" shortcut** on first launch (`internal/server/desktop_shortcut_windows.go`, pure-Go shell COM — no installer, no powershell spawn, no new dependency). Download → extract → run `Shiori.exe` once → set password → thereafter click the desktop icon. ZIP rebuilt: **79,057,527 bytes**, sha256 `3bf39e3a…fbfe3ed`. Re-verified against the new packaged exe: loopback-only, 14 providers, strict mode, `shortcut_created=True`, security probe 23/23. Go tests (server+core, incl. new `TestEnsureDesktopShortcut`) pass.
+Non-coder convenience: the packaged app now auto-creates a **Desktop + Start-Menu "Shiori" shortcut** on first launch (`internal/server/desktop_shortcut_windows.go`, pure-Go shell COM — no installer, no powershell spawn, no new dependency). Download → extract → run `Shiori.exe` once → set password → thereafter click the desktop icon.
+
+## Mobile PWA companion — 2026-09-22
+
+The web UI is now an **installable PWA** (Add to Home Screen). Added `seanime-web/public/sw.js` (minimal service worker — offline page only, never caches API/streams), `seanime-web/public/offline.html`, SW registration in `shiori-boot.js`, and the `apple-touch-icon` link in `index.html` (manifest + meta tags already existed). Secure phone access documented via Tailscale (`docs/shiori/15-MOBILE.md`). It's the full UI on mobile, not a slimmed companion; push notifications and offline playback stay parked. Note: SW registration can't be exercised in the Claude browser pane (it disables service workers), but all served files + manifest verified 200 with correct MIME; the SW is standard and registers in real Chrome/Safari (and iOS install works off the manifest regardless).
+
+ZIP rebuilt with both features: **79,060,758 bytes**, sha256 `04f6bbb3…bdd083`. Re-verified against the new packaged exe: loopback-only, 14 providers, strict mode, `shortcut_created=True`, PWA files served (`/manifest.json`, `/sw.js`, `/offline.html` all 200), security probe 23/23. Go tests (server+core, incl. `TestEnsureDesktopShortcut`) pass.
 
 Not done (needs owner): deploy the new ZIP to the live host, and the GitHub push — blocked because the local git author is the owner's real name/email, which would leak the identity on the (public) repo, and there is no CI deploy wired, so a push would not refresh the live site by itself.
 

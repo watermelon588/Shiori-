@@ -71,9 +71,9 @@ Exit criteria: updates are verifiable, opt-in, and preserve the lightweight loca
 
 Goal: support the original at-home/away vision after desktop v1 is stable.
 
-- Document secure phone access over Tailscale/HTTPS.
-- Build the postponed PWA companion for queueing downloads and controlling the auto-downloader.
-- Add agent/voice features only after permissions and destructive-action boundaries are specified.
+- ~~Document secure phone access over Tailscale/HTTPS.~~ Done 2026-09-22 (`docs/shiori/15-MOBILE.md`).
+- ~~Build the postponed PWA companion for queueing downloads and controlling the auto-downloader.~~ Shipped 2026-09-22 as an installable PWA: the existing web UI is now Add-to-Home-Screen installable (manifest + service worker + offline page in `seanime-web/public/`). It is the full UI on mobile, not a stripped-down screen — enough to browse, manage the library, queue downloads and drive the auto-downloader from a phone.
+- Still parked: web push notifications, offline library playback, a dedicated lightweight companion screen, and the agent/voice layer (add only after permissions and destructive-action boundaries are specified).
 
 Exit criteria: remote features do not expose the local server publicly and cannot start downloads without clear authorization.
 

@@ -47,9 +47,9 @@ Plain-English Go summary: the Windows entry point now prepares a private per-use
 - Added `desktop/README.txt` and `desktop/SOURCE.txt`.
 - Output exists at `site/downloads/Shiori-Windows-x64.zip`.
 - SHA-256 file exists beside it at `site/downloads/Shiori-Windows-x64.zip.sha256`.
-- Current ZIP size: 79,057,527 bytes (rebuilt 2026-09-22 with the desktop-shortcut feature).
-- Current SHA-256: `3bf39e3a9fdef61076d04931bf3017279d05e4dd1102f3804a12f1d1afbfe3ed`.
-- Previous build was 79,054,554 bytes / `a7a9a7b5…08440c` (before the shortcut feature).
+- Current ZIP size: 79,060,758 bytes (rebuilt 2026-09-22 with the desktop-shortcut feature and the installable PWA).
+- Current SHA-256: `04f6bbb3ffe8f020aedd22cca0bce93219f288c34c8859be7ebad3e723bdd083`.
+- Prior builds: 79,057,527 / `3bf39e3a…fbfe3ed` (shortcut only); 79,054,554 / `a7a9a7b5…08440c` (before either feature).
 - ZIP contents include `Shiori.exe`, `Shiori.ico`, README, SOURCE notice, GPL license, and 14 reviewed providers.
 - The script builds a clean source copy so old frontend chunks and the owner's source art are not bundled.
 - `windres` is optional. Without a compatible 64-bit resource compiler, the tray icon still works but Explorer may show Go's default executable icon.
