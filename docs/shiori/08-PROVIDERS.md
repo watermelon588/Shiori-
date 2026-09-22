@@ -1,6 +1,8 @@
 # 08 · Providers: Installed, Reviewed, Tested
 
 Installed 2026-09-17 from the community marketplace index
+
+The Windows desktop release bundles these reviewed extension JSON files from `seanime/dev-datadir/extensions`. On first launch it copies only providers that are missing from `%APPDATA%\Shiori\extensions`; it never overwrites a user's installed provider.
 (`raw.githubusercontent.com/Bas1874/Seanime-Marketplace/main/Marketplace/Main.json`) through
 `POST /api/v1/extensions/external/install`. They live in `seanime/dev-datadir/extensions/`.
 

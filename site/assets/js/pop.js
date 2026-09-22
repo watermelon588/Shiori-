@@ -4,8 +4,14 @@ gsap.registerPlugin(ScrollTrigger)
 const $ = (s, r = document) => r.querySelector(s)
 const $$ = (s, r = document) => [...r.querySelectorAll(s)]
 
-// Download sticker appears once the hero's own Download button has scrolled away.
-ScrollTrigger.create({ trigger: ".hero", start: "bottom 70%", end: "max", onToggle: s => $("[data-pill]").classList.toggle("is-shown", s.isActive) })
+// Download sticker appears once the hero's own button has scrolled away, then clears the checkout section.
+{
+    const pill = $("[data-pill]")
+    let heroHasLeft = false, checkoutIsVisible = false
+    const updatePill = () => pill.classList.toggle("is-shown", heroHasLeft && !checkoutIsVisible)
+    ScrollTrigger.create({ trigger: ".hero", start: "bottom 70%", end: "max", onToggle: s => { heroHasLeft = s.isActive; updatePill() } })
+    ScrollTrigger.create({ trigger: "#receipt", start: "top bottom", end: "bottom top", onToggle: s => { checkoutIsVisible = s.isActive; updatePill() } })
+}
 
 // Stamp card: one stamp per ₹100 raised (set SHIORI_SITE.raised in config.js).
 {

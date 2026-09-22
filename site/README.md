@@ -10,8 +10,9 @@ Static marketing site for Shiori: no build step, no framework. Two designs of th
 | `docs.html` | Install, first run, downloads, auto downloader, phone access, build from source |
 | `legal.html` | Privacy policy and terms of use |
 
-All links and numbers live in **`assets/js/config.js`**: download URL, GitHub URL, demo video, support email, UPI ID,
-donations raised and the goal. Empty `downloadUrl` makes every Download button scroll to the install steps.
+All links and numbers live in **`assets/js/config.js`**: download URL, optional public links, demo video,
+donations raised and the goal. The desktop build script writes the release to `downloads/Shiori-Windows-x64.zip`; empty
+`downloadUrl` makes every Download button scroll to the install steps.
 
 ## Preview locally
 
@@ -52,4 +53,4 @@ Record it (the `brag` skill can turn the site into a launch video), save it as `
 
 - Motion is GSAP 3.13 (ScrollTrigger, SplitText) from jsDelivr, all behind `prefers-reduced-motion`.
 - Both designs are light-only on purpose: they mirror the app's two light themes.
-- The support email and UPI ID currently contain the owner's real name; swap them in `config.js` when pseudonymous ones exist.
+- Public repository, email and payment links stay disabled until pseudonymous destinations exist.

@@ -54,20 +54,19 @@
             <h2>Install</h2>
             <ol class="steps">
                 <li>Download the latest release zip for Windows and unzip it into a folder you keep, for example <code>C:\Apps\Shiori</code>.</li>
-                <li>Create a data folder for Shiori, for example <code>C:\Users\you\Shiori</code>. Your settings and database live there.</li>
-                <li>Double-click <code>Start Shiori.bat</code> (it keeps your data in a <code>data</code> folder next to it), or start it from a terminal with your own data folder:
-                    <pre><code>.\shiori.exe --datadir "C:/Users/you/Shiori"</code></pre></li>
-                <li>Open <b>http://localhost:43000</b> in your browser.</li>
+                <li>Double-click <code>Shiori.exe</code>. The first-run setup page opens in your browser.</li>
+                <li>Choose a password of at least 20 characters. Shiori saves it under <code>%APPDATA%\Shiori</code>, enables strict mode and starts locally.</li>
+                <li>On later launches, double-click <code>Shiori.exe</code>. If it is already running in the tray, the same click opens it.</li>
             </ol>
             <p class="note">macOS and Linux: build from source (below). The same commands work with <code>/</code> paths.</p>
         </section>
 
         <section id="password">
             <h2>Set a password</h2>
-            <p>Without a password, anyone who can reach your computer on the network can control Shiori. Set one before anything else. Copy <code>.env.example</code> into your data folder as <code>.env</code>:</p>
+            <p>The Windows app asks for a password before the server starts for the first time. It writes the following private file for you:</p>
             <pre><code>SEANIME_SERVER_PASSWORD=pick-a-long-random-password
 SEANIME_SECURE_MODE=strict</code></pre>
-            <p>Restart Shiori. The login page now asks for that password on every new device. Ten wrong tries lock a device out for five minutes.</p>
+            <p>The login page asks for that password on every new browser or device. Ten wrong tries lock a device out for five minutes. Advanced users can still edit <code>%APPDATA%\Shiori\.env</code> while Shiori is stopped.</p>
             <figure><img src="assets/shots/settings.webp" alt="Settings" loading="lazy" /></figure>
         </section>
 
@@ -76,7 +75,7 @@ SEANIME_SECURE_MODE=strict</code></pre>
             <ol class="steps">
                 <li><b>Library folder:</b> Settings, Local Anime Library. Choose where downloaded episodes go. Pick a drive with room: a season is roughly 4 to 15 GB.</li>
                 <li><b>AniList (optional):</b> create a free account at anilist.co, then the account button at the bottom of the sidebar, Log in with AniList. Progress and lists sync from then on.</li>
-                <li><b>Sources:</b> Extensions, Marketplace. Install the streaming, torrent and manga sources you want. Shiori ships with none.</li>
+                <li><b>Sources:</b> The Windows zip includes the reviewed Shiori streaming, torrent and manga sources. Use Extensions if you want to disable one or add another after reviewing its code.</li>
             </ol>
         </section>
 
