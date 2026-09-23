@@ -23,7 +23,14 @@ Non-coder convenience: the packaged app now auto-creates a **Desktop + Start-Men
 
 The web UI is now an **installable PWA** (Add to Home Screen). Added `seanime-web/public/sw.js` (minimal service worker — offline page only, never caches API/streams), `seanime-web/public/offline.html`, SW registration in `shiori-boot.js`, and the `apple-touch-icon` link in `index.html` (manifest + meta tags already existed). Secure phone access documented via Tailscale (`docs/shiori/15-MOBILE.md`). It's the full UI on mobile, not a slimmed companion; push notifications and offline playback stay parked. Note: SW registration can't be exercised in the Claude browser pane (it disables service workers), but all served files + manifest verified 200 with correct MIME; the SW is standard and registers in real Chrome/Safari (and iOS install works off the manifest regardless).
 
-ZIP rebuilt with both features: **79,060,758 bytes**, sha256 `04f6bbb3…bdd083`. Re-verified against the new packaged exe: loopback-only, 14 providers, strict mode, `shortcut_created=True`, PWA files served (`/manifest.json`, `/sw.js`, `/offline.html` all 200), security probe 23/23. Go tests (server+core, incl. `TestEnsureDesktopShortcut`) pass.
+## Friend-release fixes — 2026-09-23
+
+- First-run redirect race fixed (setup page no longer redirects after a fixed 3 s; the app opens a tab when the server actually answers). Cold start measured 3.1 s.
+- Site (index, docs, pop) + README warn about SmartScreen "More info → Run anyway" and point to the desktop icon.
+- Defender scan of the live download: no threats.
+- ZIP now **79,058,883 bytes**, sha256 `3317ab19…32ad36`; packaged-exe checks + probe 23/23 pass.
+
+Previous build (PWA): **79,060,758 bytes**, sha256 `04f6bbb3…bdd083`. Re-verified against the new packaged exe: loopback-only, 14 providers, strict mode, `shortcut_created=True`, PWA files served (`/manifest.json`, `/sw.js`, `/offline.html` all 200), security probe 23/23. Go tests (server+core, incl. `TestEnsureDesktopShortcut`) pass.
 
 Not done (needs owner): deploy the new ZIP to the live host, and the GitHub push — blocked because the local git author is the owner's real name/email, which would leak the identity on the (public) repo, and there is no CI deploy wired, so a push would not refresh the live site by itself.
 

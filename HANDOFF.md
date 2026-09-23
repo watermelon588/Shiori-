@@ -47,9 +47,11 @@ Plain-English Go summary: the Windows entry point now prepares a private per-use
 - Added `desktop/README.txt` and `desktop/SOURCE.txt`.
 - Output exists at `site/downloads/Shiori-Windows-x64.zip`.
 - SHA-256 file exists beside it at `site/downloads/Shiori-Windows-x64.zip.sha256`.
-- Current ZIP size: 79,060,758 bytes (rebuilt 2026-09-22 with the desktop-shortcut feature and the installable PWA).
-- Current SHA-256: `04f6bbb3ffe8f020aedd22cca0bce93219f288c34c8859be7ebad3e723bdd083`.
-- Prior builds: 79,057,527 / `3bf39e3a…fbfe3ed` (shortcut only); 79,054,554 / `a7a9a7b5…08440c` (before either feature).
+- Current ZIP size: 79,058,883 bytes (rebuilt 2026-09-23: shortcut + PWA + first-run redirect fix).
+- Current SHA-256: `3317ab19a02c060a6cbac11c75d238dc3220e1220f166594bab2b5541632ad36`.
+- Prior builds: 79,060,758 / `04f6bbb3…bdd083` (shortcut + PWA); 79,057,527 / `3bf39e3a…fbfe3ed` (shortcut only); 79,054,554 / `a7a9a7b5…08440c` (original).
+
+First-run redirect fix (2026-09-23): the setup-complete page used to auto-redirect after 3 s, but a cold start measured 3.1 s on a fast machine, so slower laptops would land on "site can't be reached". The page no longer redirects; `openDesktopWhenReady` now always runs (deadline raised to 90 s) and opens Shiori in a new tab only once the server answers. Site + README now warn about the SmartScreen "More info → Run anyway" screen and point to the desktop icon. Windows Defender scan of the live download: no threats.
 - ZIP contents include `Shiori.exe`, `Shiori.ico`, README, SOURCE notice, GPL license, and 14 reviewed providers.
 - The script builds a clean source copy so old frontend chunks and the owner's source art are not bundled.
 - `windres` is optional. Without a compatible 64-bit resource compiler, the tray icon still works but Explorer may show Go's default executable icon.

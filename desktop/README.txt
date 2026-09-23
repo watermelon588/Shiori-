@@ -5,9 +5,11 @@ Shiori is a private anime and manga hub that runs on your own computer.
 
 FIRST LAUNCH
 1. Extract the whole zip to a folder you keep.
-2. Double-click Shiori.exe.
+2. Double-click Shiori.exe. Shiori is not code-signed yet, so Windows may show
+   "Windows protected your PC". Click "More info", then "Run anyway".
 3. Your browser opens a local setup page. Choose a password of at least 20 characters.
-4. Shiori starts at http://127.0.0.1:43000 and stays available from the tray.
+4. Shiori opens in a new browser tab as soon as it is ready (http://127.0.0.1:43000)
+   and stays available from the tray.
 5. A "Shiori" shortcut is placed on your Desktop and in the Start Menu automatically.
 
 LATER LAUNCHES
