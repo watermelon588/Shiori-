@@ -1,28 +1,26 @@
-﻿# 01 Â· Repository Map
+# 01 · Repository Map
 
-> Snapshot taken 2026-09-17. Workspace root: `Shiori (æ ž)/`.
+> Snapshot taken 2026-09-17. Workspace root: `Shiori (栞)/`.
 
 ## What is in this workspace
 
 ```
-Shiori (æ ž)/
-â”œâ”€â”€ seanime/              â† The real app. Fork of Seanime v3.10.2 "Saisei" (own .git, gitignored by the parent repo)
-â”‚   â”œâ”€â”€ main.go           â† Go entrypoint (one binary = API server + embedded web UI)
-â”‚   â”œâ”€â”€ internal/         â† All Go server code (~53 packages)
-â”‚   â”œâ”€â”€ seanime-web/      â† React frontend (rsbuild/rspack + Tailwind 3 + TanStack Router)
-â”‚   â”œâ”€â”€ seanime-denshi/   â† Electron desktop wrapper (not needed for local browser use)
-â”‚   â”œâ”€â”€ codegen/          â† Generates TS types/hooks from Go handlers (keeps FE and BE in sync)
-â”‚   â”œâ”€â”€ dev-datadir/      â† Your local data dir: seanime.db (SQLite), config.toml, extensions/, logs/
-â”‚   â”œâ”€â”€ web/              â† Built frontend that seanime.exe serves in production mode
-â”‚   â””â”€â”€ seanime.exe       â† Prebuilt server binary (built 2026-08-04)
-â”œâ”€â”€ shiori-backend/       â† Separate Node/Express 5 service (Supabase auth, MongoDB). Mostly placeholders.
-â”œâ”€â”€ docs/                 â† Workspace docs (this folder + SEANIME_ARCHITECTURE_ANALYSIS.md)
-â”œâ”€â”€ AGENTS.md / coding assistant.md â† Agent contract (read first)
-â”œâ”€â”€ scripts/              â† test-providers.mjs (live provider smoke test)
-â”œâ”€â”€ .coding assistant/launch.json   â† Dev launch configs (seanime-server :43000, seanime-web :43210)
-â”œâ”€â”€ .coding assistant/skills/       â† 74 vendored skills
-â”œâ”€â”€ AGENT_INSTRUCTION.md  â† Rules for the Node backend (Postman docs, response shapesâ€¦)
-â””â”€â”€ hello.go              â† Go hello-world scratch file, unused
+Shiori (栞)/
+├── seanime/              ← The real app. Fork of Seanime v3.10.2 "Saisei" (own .git, gitignored by the parent repo)
+│   ├── main.go           ← Go entrypoint (one binary = API server + embedded web UI)
+│   ├── internal/         ← All Go server code (~53 packages)
+│   ├── seanime-web/      ← React frontend (rsbuild/rspack + Tailwind 3 + TanStack Router)
+│   ├── seanime-denshi/   ← Electron desktop wrapper (not needed for local browser use)
+│   ├── codegen/          ← Generates TS types/hooks from Go handlers (keeps FE and BE in sync)
+│   ├── dev-datadir/      ← Your local data dir: seanime.db (SQLite), config.toml, extensions/, logs/
+│   ├── web/              ← Built frontend that seanime.exe serves in production mode
+│   └── seanime.exe       ← Prebuilt server binary (built 2026-08-04)
+├── shiori-backend/       ← Separate Node/Express 5 service (Supabase auth, MongoDB). Mostly placeholders.
+├── docs/                 ← Workspace docs (this folder + SEANIME_ARCHITECTURE_ANALYSIS.md)
+├── AGENTS.md             ← Agent contract (read first)
+├── scripts/              ← test-providers.mjs (live provider smoke test)
+├── AGENT_INSTRUCTION.md  ← Rules for the Node backend (Postman docs, response shapes…)
+└── hello.go              ← Go hello-world scratch file, unused
 ```
 
 ## How the two backends relate today
@@ -43,7 +41,7 @@ They are **not connected**. The Node service was planned as an "orchestrator" th
 seanime/seanime.exe --datadir "<absolute path>/seanime/dev-datadir"
 
 # terminal 2: frontend dev server with hot reload
-cd seanime/seanime-web && npm run dev      # http://127.0.0.1:43210 â†’ proxies API to :43000
+cd seanime/seanime-web && npm run dev      # http://127.0.0.1:43210 → proxies API to :43000
 ```
 
 The data dir path **must be absolute** or the server exits with `Data directory path must be absolute`.

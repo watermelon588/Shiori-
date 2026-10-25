@@ -1,11 +1,11 @@
-﻿# Shiori website
+# Shiori website
 
 Static marketing site for Shiori: no build step, no framework. Two designs of the same content:
 
 | Page | What |
 |---|---|
-| `index.html` | å‡ª Nagi, calm and cinematic (default landing) |
-| `pop.html` | ä¹±èˆž Ranbu, loud konbini poster wall |
+| `index.html` | 凪 Nagi, calm and cinematic (default landing) |
+| `pop.html` | 乱舞 Ranbu, loud konbini poster wall |
 | `gallery.html` | All 169 art pieces: masonry, filters, shuffle, lightbox, deep links (`gallery.html#a147`) |
 | `docs.html` | Install, first run, downloads, auto downloader, phone access, build from source |
 | `legal.html` | Privacy policy and terms of use |
@@ -19,7 +19,6 @@ donations raised and the goal. The desktop build script writes the release to `d
 ```bash
 python -m http.server 4600 --directory site      # then open http://localhost:4600
 ```
-(In local development environment desktop: `preview_start shiori-site`.)
 
 ## Deploy (free)
 

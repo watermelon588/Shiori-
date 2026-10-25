@@ -1,14 +1,9 @@
-﻿# 10 Â· Skills Available in This Project
+# 10 · Local Agent Skills
 
-74 skills are vendored into `.coding assistant/skills/` (copied from the global `~/.coding assistant/skills` and the Ponytail plugin on 2026-09-17), so the project carries its own toolkit.
+The local development environment can provide a curated toolkit of design, motion, workflow, debugging, and review skills. These machine-local tools are intentionally not part of the repository.
 Excluded as irrelevant: `write-swift`, `animate-expo` (React Native), `my-skills` (index only).
 
-To refresh after the global skills update (Git Bash, from the repo root):
-
-```bash
-for d in ~/.coding assistant/skills/*/; do n=$(basename "$d"); case "$n" in write-swift|synced|my-skills|animate-expo) continue;; esac; rm -rf ".coding assistant/skills/$n"; cp -r "$d" ".coding assistant/skills/$n"; done
-for d in ~/.coding assistant/plugins/cache/ponytail/ponytail/*/skills/*/; do n=$(basename "$d"); rm -rf ".coding assistant/skills/$n"; cp -r "$d" ".coding assistant/skills/$n"; done
-```
+Refresh local tools through the development environment rather than copying them into this project.
 
 ## Design & UI
 
@@ -30,7 +25,7 @@ for d in ~/.coding assistant/plugins/cache/ponytail/ponytail/*/skills/*/; do n=$
 
 | Skill | Use for |
 |---|---|
-| `animate` | **Build** any animation (gate â†’ purpose â†’ tool â†’ props â†’ curve) |
+| `animate` | **Build** any animation (gate → purpose → tool → props → curve) |
 | `review-animations` | Critique a diff's motion |
 | `improve-animations` | App-wide motion audit plus a plan |
 | `find-animation-opportunities` | Where motion is missing |

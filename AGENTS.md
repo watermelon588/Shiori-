@@ -1,4 +1,4 @@
-﻿# AGENTS.md: Shiori (æ ž)
+# AGENTS.md: Shiori (栞)
 
 Read this first in every session. It is the contract for any AI agent working in this repo.
 
@@ -17,31 +17,28 @@ The north star is `docs/shiori/00-VISION.md`. Check features against it.
 ## 2. Repo map
 
 ```
-Shiori (æ ž)/
-â”œâ”€â”€ AGENTS.md / coding assistant.md      â† you are here
-â”œâ”€â”€ seanime/                   â† THE APP (own git repo, branch `shiori-redesign`)
-â”‚   â”œâ”€â”€ internal/              â† Go backend (Echo API :43000, SQLite, Goja extensions)
-â”‚   â”œâ”€â”€ seanime-web/           â† React 19 + rsbuild + Tailwind 3 + TanStack Router/Query + motion
-â”‚   â”œâ”€â”€ dev-datadir/           â† live data: seanime.db, config.toml, extensions/, logs/
-â”‚   â””â”€â”€ seanime.exe            â† prebuilt server binary (Go source changes need a rebuild)
-â”œâ”€â”€ shiori-backend/            â† Node/Express skeleton, NOT connected; its rules live in AGENT_INSTRUCTION.md
-â”œâ”€â”€ scripts/test-providers.mjs â† live smoke test for every provider (torrent / stream playback / manga)
-â”œâ”€â”€ docs/shiori/               â† architecture, schema, design, providers, hosting, skills
-â””â”€â”€ .coding assistant/
-    â”œâ”€â”€ launch.json            â† dev servers (seanime-server, seanime-web)
-    â””â”€â”€ skills/                â† 74 vendored skills (design, motion, GSAP, ponytail, graphifyâ€¦)
+Shiori (栞)/
+├── AGENTS.md                  ← you are here
+├── seanime/                   ← THE APP (own git repo, branch `shiori-redesign`)
+│   ├── internal/              ← Go backend (Echo API :43000, SQLite, Goja extensions)
+│   ├── seanime-web/           ← React 19 + rsbuild + Tailwind 3 + TanStack Router/Query + motion
+│   ├── dev-datadir/           ← live data: seanime.db, config.toml, extensions/, logs/
+│   └── seanime.exe            ← prebuilt server binary (Go source changes need a rebuild)
+├── shiori-backend/            ← Node/Express skeleton, NOT connected; its rules live in AGENT_INSTRUCTION.md
+├── scripts/test-providers.mjs ← live smoke test for every provider (torrent / stream playback / manga)
+├── docs/shiori/               ← architecture, schema, design, providers, hosting, skills
 ```
 
 `AGENT_INSTRUCTION.md` and `.agents/AGENTS.md` describe the **Node `shiori-backend` only** (Postman docs, Mongo, Supabase). They do not govern `seanime/`.
 
 ## 3. Run it
 
-Daily use: double-click `start-shiori.cmd` in the repo root (or run it from a terminal). It starts `seanime/seanime-shiori.exe` with `seanime/dev-datadir` and opens http://localhost:43000; if Shiori is already running it just opens the browser.
+Daily use (owner, since 2026-09-24): the **Shiori** desktop / Start-menu icon. It runs the packaged tray app installed at `%LOCALAPPDATA%\Programs\Shiori\Shiori.exe` with `--datadir <8.3 short path of seanime\dev-datadir>` (a short path because Windows shortcuts drop the 栞 character from arguments). No console window; it opens the browser once the server answers and stays in the tray (Quit Shiori to stop). Renaming or moving the repo folder breaks the icon: re-point its arguments. `start-shiori.cmd` still works as a fallback, but never run both at once. To refresh the installed app after a rebuild, copy `Shiori.exe` from the new ZIP into that folder.
 
 ```bash
 # Go server (the data dir MUST be an absolute path)
-seanime/seanime.exe --datadir "C:/path/to/Shiori (æ ž)/seanime/dev-datadir"
-# Frontend with hot reload â†’ http://127.0.0.1:43210 (talks to :43000)
+seanime/seanime.exe --datadir "C:/path/to/Shiori (栞)/seanime/dev-datadir"
+# Frontend with hot reload → http://127.0.0.1:43210 (talks to :43000)
 cd seanime/seanime-web && npm run dev
 # Provider health check (server must be running)
 node scripts/test-providers.mjs            # or --only torrent|stream|manga
@@ -55,7 +52,7 @@ cd seanime/seanime-web && npm run build && cp -r out/. ../web/     # keeps web/a
 
 `seanime.exe` (prebuilt, 2026-08-04) was compiled in dev configuration: it serves the API only and points at :43210, so it cannot serve `web/`. `seanime-shiori.exe` is built from source (`go build -o seanime-shiori.exe -trimpath -ldflags="-s -w" -tags=nosystray .`) and serves the built UI on :43000.
 
-In local development environment desktop, use `preview_start` with `seanime-server` then `seanime-web`.
+In a supported development environment, start `seanime-server` and then `seanime-web`.
 Checks before calling frontend work done: `cd seanime/seanime-web && npx tsc --noEmit -p .`, then a visual check in the browser pane.
 
 ## 4. Current state (2026-09-17)
@@ -63,24 +60,26 @@ Checks before calling frontend work done: `cd seanime/seanime-web && npx tsc --n
 | Area | State |
 |---|---|
 | AniList login | Works (user `zaxxewu`; list currently empty) |
-| Torrent providers | AnimeTosho (NEW) âœ…, Nyaa âœ…, SeaDex âœ… |
-| Torrent client | Built-in Seanime client âœ… (experimental flag enabled in `config.toml`) |
-| Auto-downloader | Enabled, provider AnimeTosho, every 20 min. It only acts on rules/followed shows |
-| Online streaming | KickAssAnime âœ… plays, AniZone âœ… plays, Anikoto âš ï¸ lists episodes but its CDN 404s, AnimePahe âŒ needs "Aqua's Utils" solver on :8191 |
-| Manga | MangaBuddy, Atsumaru, MangaFreak, MangaBats, MangaFire âœ…; AsuraScans, KuraManga âœ… (manhwa-only catalogues) |
+| Torrent providers | AnimeTosho (NEW) ✅, Nyaa ✅, SeaDex ✅ |
+| Torrent client | Built-in Seanime client ✅ (experimental flag enabled in `config.toml`) |
+| Auto-downloader | **Disabled** 2026-09-24 at the owner's request (provider AnimeTosho, 20 min interval kept for when it is re-enabled in Settings) |
+| Local playback | Default player **VLC** (`C:\Program Files\VideoLAN\VLC\vlc.exe`, remote on 127.0.0.1:8080). mpv is not installed, which is why local Play failed on 09-19. VLC's web remote was enabled in `%APPDATA%\vlc\vlcrc` (localhost only, random password shared with Shiori's media-player settings); the original is at `vlcrc.shiori-backup` |
+| Server binding | `dev-datadir/config.toml` host is now `127.0.0.1` (the desktop launcher enforces loopback). LAN access by IP no longer works; reach it from a phone via Tailscale (`15-MOBILE.md`) |
+| Online streaming | KickAssAnime ✅ plays, AniZone ✅ plays, Anikoto ⚠️ lists episodes but its CDN 404s, AnimePahe ❌ needs "Aqua's Utils" solver on :8191 |
+| Manga | MangaBuddy, Atsumaru, MangaFreak, MangaBats, MangaFire ✅; AsuraScans, KuraManga ✅ (manhwa-only catalogues) |
 | Library folder | `%USERPROFILE%/Videos/Shiori/Anime` (**C: has ~20 GB free**) |
-| Frontend | **Two light variants** over every screen: å‡ª Nagi (calm) and ä¹±èˆž Ranbu (loud). Switch from the top bar, the sidebar, the profile page, or `?variant=nagi|ranbu`. Owner is choosing. |
+| Frontend | **Two light variants** over every screen: 凪 Nagi (calm) and 乱舞 Ranbu (loud). Switch from the top bar, the sidebar, the profile page, or `?variant=nagi|ranbu`. Owner is choosing. |
 | Shell | **Sidebar is the only navigation** (top navbar removed 2026-09-18): 80px rail, expands on hover, pin to keep open; back/forward, search field, grouped Browse / Library / Downloads sections, account menu at the bottom. Mobile gets a floating menu button. Persistent footer, `/profile` page |
 | Pages | Home = hero + search + Aired recently + format/genre browser (season/TV/movie/short/ONA/OVA) + trending/season/coming soon/movies/manga. Anime pages open on **Watch online**; every episode has its own download button. Schedule, Settings, Lists, Manga, Downloads, Auto downloader, Debrid, Scan summaries, Offline all have a `ShioriPageHeader` and a real empty state |
 | Security | **Server password + strict mode via env vars** (`SEANIME_SERVER_PASSWORD`, `SEANIME_SECURE_MODE=strict`), rate limiting, CSP and hardening headers, protected media folders. Owner has not set the password yet. Audit: `docs/shiori/12-SECURITY.md`; verify with `scripts/security-probe.mjs` (23/23 pass) |
 | Public pages | `/public/auth` (login), `/public/guide`, `/public/privacy`, `/public/terms`, `/public/credits`, `/public/support` (donations): readable without the password. Support email in footer and legal pages |
-| Donations | `/public/support`, configured in `src/lib/shiori/support.ts` (all methods empty â†’ "not open yet"). Setup and risks: `docs/shiori/13-DONATIONS.md` |
+| Donations | `/public/support`, configured in `src/lib/shiori/support.ts` (all methods empty → "not open yet"). Setup and risks: `docs/shiori/13-DONATIONS.md` |
 | Secrets file | The server reads `<data dir>/.env` at startup (`SEANIME_SERVER_PASSWORD`, `SEANIME_SECURE_MODE`); template in `seanime/.env.example`. `dev-datadir/` is git-ignored |
-| Guide | `/guide` (sidebar â†’ Guide): in-app manual for users + developers, screenshots in `public/shiori/guide/*.webp` (re-shoot with `scripts/capture-ui.mjs`, convert to webp) |
-| Launch video | `brag-output/brag.mp4` (20 s, 1920Ã—1080, `/brag` + Hyperframes; source in `brag-output/composition/`, re-render with `npx hyperframes render --quality delivery --output ../brag.mp4`). Plain 60 s app demo: `brag-output-demo/demo.mp4` (full-page captures of every page panned in ffmpeg, captions, no audio; how-to in `brag-output-demo/README.md`). Not yet copied to `site/assets/demo.mp4` / `config.js â†’ demoVideo` |
+| Guide | `/guide` (sidebar → Guide): in-app manual for users + developers, screenshots in `public/shiori/guide/*.webp` (re-shoot with `scripts/capture-ui.mjs`, convert to webp) |
+| Launch video | `brag-output/brag.mp4` (20 s, 1920×1080, `/brag` + Hyperframes; source in `brag-output/composition/`, re-render with `npx hyperframes render --quality delivery --output ../brag.mp4`). Plain 60 s app demo: `brag-output-demo/demo.mp4` (full-page captures of every page panned in ffmpeg, captions, no audio; how-to in `brag-output-demo/README.md`). Not yet copied to `site/assets/demo.mp4` / `config.js → demoVideo` |
 | Owner art | 178 curated images in `seanime-web/public/shiori/art` (30 cut-outs), built by `scripts/build-art.py` from `art-source/` |
-| Desktop app | Portable Windows x64 tray app. First launch opens a loopback-only password setup, stores data in `%APPDATA%/Shiori`, enables strict mode, seeds the reviewed providers, **auto-creates a Desktop + Start-Menu "Shiori" shortcut** (`internal/server/desktop_shortcut_windows.go`, pure-Go shell COM â€” no installer, no powershell spawn) and opens `127.0.0.1:43000`; later launches are one click from that icon. Build: `scripts/build-desktop.ps1`; download: `site/downloads/Shiori-Windows-x64.zip` (79,058,883 bytes, sha256 `3317ab19â€¦32ad36`). After setup the browser opens only once the server answers (no fixed-delay redirect). Verified 2026-09-23: isolated packaged-exe run â†’ loopback-only, 14 providers, strict mode, shortcut created, PWA files served, security probe 23/23; Defender scan clean |
-| Mobile / PWA | The web UI is an **installable PWA** (Add to Home Screen): `manifest.json` + minimal service worker (`sw.js`, offline page only â€” never caches API/streams) + registration in `shiori-boot.js`, all in `seanime-web/public/`. Reach it from a phone securely over Tailscale (`tailscale serve --bg 43000` â†’ HTTPS to loopback; server stays 127.0.0.1 + strict). It's the full UI on mobile, not a slimmed companion. Docs: `docs/shiori/15-MOBILE.md`. Push notifications / offline playback still parked. **Requires a fresh exe build to ship** (PWA files are embedded in `web/`) |
+| Desktop app | Portable Windows x64 tray app. First launch opens a loopback-only password setup, stores data in `%APPDATA%/Shiori`, enables strict mode, seeds the reviewed providers, **auto-creates a Desktop + Start-Menu "Shiori" shortcut** (`internal/server/desktop_shortcut_windows.go`, pure-Go shell COM — no installer, no powershell spawn) and opens `127.0.0.1:43000`; later launches are one click from that icon. Build: `scripts/build-desktop.ps1`; download: `site/downloads/Shiori-Windows-x64.zip` (79,058,883 bytes, sha256 `3317ab19…32ad36`). After setup the browser opens only once the server answers (no fixed-delay redirect). Verified 2026-09-23: isolated packaged-exe run → loopback-only, 14 providers, strict mode, shortcut created, PWA files served, security probe 23/23; Defender scan clean |
+| Mobile / PWA | The web UI is an **installable PWA** (Add to Home Screen): `manifest.json` + minimal service worker (`sw.js`, offline page only — never caches API/streams) + registration in `shiori-boot.js`, all in `seanime-web/public/`. Reach it from a phone securely over Tailscale (`tailscale serve --bg 43000` → HTTPS to loopback; server stays 127.0.0.1 + strict). It's the full UI on mobile, not a slimmed companion. Docs: `docs/shiori/15-MOBILE.md`. Push notifications / offline playback still parked. **Requires a fresh exe build to ship** (PWA files are embedded in `web/`) |
 
 Full provider details are in `docs/shiori/08-PROVIDERS.md`.
 
@@ -100,22 +99,22 @@ Full provider details are in `docs/shiori/08-PROVIDERS.md`.
 ## 6. Design direction (active)
 
 Two switchable light worlds, both applied to every screen (details: `docs/shiori/09-DESIGN-DIRECTION.md`, contract: `seanime/.impeccable/surfaces/`):
-- **å‡ª Nagi**: an anime ending sequence. Sky-white ground, ink navy, one cobalt accent, Zen Maru Gothic, drifting stills, credits-style copy.
-- **ä¹±èˆž Ranbu**: a konbini POP wall. Fluorescent white, POP yellow, magenta, shelf blue, Dela Gothic One + Mochiy Pop One, die-cut stickers, cut-out characters, an LED ticker.
+- **凪 Nagi**: an anime ending sequence. Sky-white ground, ink navy, one cobalt accent, Zen Maru Gothic, drifting stills, credits-style copy.
+- **乱舞 Ranbu**: a konbini POP wall. Fluorescent white, POP yellow, magenta, shelf blue, Dela Gothic One + Mochiy Pop One, die-cut stickers, cut-out characters, an LED ticker.
 
 How it works: `html[data-shiori-variant]` inverts Seanime's gray/brand/white/black tokens (Seanime was dark-only), so hard-coded dark classes flip without edits. Styles live in `src/app/shiori.css` (tokens), `shiori-surfaces.css` (heroes, shell), `shiori-components.css` (UI primitives). Home heroes: `src/components/shared/shiori/`. The old dark vermilion pass (`05-DESIGN-SYSTEM.md`) is retired.
 
 Motion budget (from the `animate` / `emil-design-eng` skills):
 - Animate `transform` / `opacity` (plus `clip-path`) only. Never `transition: all`.
-- UI motion 150â€“300 ms, strong ease-out `cubic-bezier(0.23, 1, 0.32, 1)`; springs only for gestures and drag.
+- UI motion 150–300 ms, strong ease-out `cubic-bezier(0.23, 1, 0.32, 1)`; springs only for gestures and drag.
 - Nothing animates on actions used 100+ times a day (keyboard shortcuts, the command palette).
-- Stagger groups by 30â€“80 ms; never block interaction.
+- Stagger groups by 30–80 ms; never block interaction.
 - Always ship `prefers-reduced-motion` and `(hover: hover) and (pointer: fine)` gating.
 - CSS first, `motion/react` for exits, layout and springs. GSAP only for scroll-pinned showpieces.
 
 ## 7. Skills: which to use when
 
-Vendored in `.coding assistant/skills/`. The full map is in `docs/shiori/10-SKILLS.md`.
+The local agent skill map is in `docs/shiori/10-SKILLS.md`.
 
 | Task | Skill(s) |
 |---|---|
@@ -138,7 +137,7 @@ Vendored in `.coding assistant/skills/`. The full map is in `docs/shiori/10-SKIL
 - Online streaming already has automatic provider fallback (`use-onlinestream-auto-provider-cycler.ts`). The order comes from `seanime-web/src/lib/shiori/provider-priority.ts`.
 - `seanime/` had uncommitted upstream codegen changes before Shiori work began. Leave them alone.
 - The browser pane often reports `visibilityState: hidden`; Framer Motion fades then freeze at opacity 0 in screenshots. That is a capture artifact, not a bug. Use `scripts/capture-ui.mjs` (puppeteer-core + installed Chrome, real time, `?capture` settles motion) for real evidence.
-- Plain `chrome --headless --screenshot` is unreliable here: virtual time freezes Framer Motion, it cannot write into paths containing æ ž, and it has a ~500px minimum width. Use the puppeteer script.
+- Plain `chrome --headless --screenshot` is unreliable here: virtual time freezes Framer Motion, it cannot write into paths containing 栞, and it has a ~500px minimum width. Use the puppeteer script.
 - `seanime/web/` is build output, but it also holds the owner's original image drop (`web/assets`). Deploy with `cp -r out/. ../web/` (never delete the folder); the processed copies live in `public/shiori/art` and the safe originals in `art-source/`.
 - Frontend performance rules learned the hard way: never stack more than two full-bleed images in the hero (the compositor holds each as a layer), pause marquees off-screen with `useInView`, and never put `scrollbar-color` (or any inherited property) on a universal selector: it forces a style recalc across the whole DOM.
 - `npm run build` type-checks before the router plugin regenerates `routeTree.gen.ts`, so a brand-new route fails the build. Run `npx rsbuild build` once (regenerates the tree), then `npx tsc --noEmit -p .`.
@@ -148,4 +147,4 @@ Vendored in `.coding assistant/skills/`. The full map is in `docs/shiori/10-SKIL
 
 ## 9. After every task
 
-Update `AGENTS.md` Â§4 if the state changed, update the relevant `docs/shiori/*` page, and rerun `scripts/test-providers.mjs` if providers were touched.
+Update `AGENTS.md` §4 if the state changed, update the relevant `docs/shiori/*` page, and rerun `scripts/test-providers.mjs` if providers were touched.

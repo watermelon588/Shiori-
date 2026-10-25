@@ -1,8 +1,8 @@
-﻿# HANDOFF â€” Shiori desktop release
+# HANDOFF — Shiori desktop release
 
 Updated: 2026-09-22
 
-This is the continuation point for local development environment. The current request was to make Shiori a downloadable, lightweight Windows desktop app with first-launch password setup and later one-click local launch, then wire the website Download buttons to it.
+This is the continuation point for the next coding agent. The current request was to make Shiori a downloadable, lightweight Windows desktop app with first-launch password setup and later one-click local launch, then wire the website Download buttons to it.
 
 ## Read first
 
@@ -20,7 +20,7 @@ Do not push to GitHub. Do not start a real torrent download. Do not print the pa
 - Uses Seanime's existing Go server and Windows tray integration; no Electron and no new runtime dependency.
 - First launch defaults to `%APPDATA%\Shiori` and `127.0.0.1:43000`.
 - If no password exists, Shiori opens a temporary loopback-only setup page.
-- Password rules: 20â€“256 characters, confirmation required, no line breaks or surrounding whitespace.
+- Password rules: 20–256 characters, confirmation required, no line breaks or surrounding whitespace.
 - Setup writes `.env` with `SEANIME_SERVER_PASSWORD` and `SEANIME_SECURE_MODE=strict`.
 - Reviewed provider JSON files are copied on first launch without overwriting user files.
 - Later launches are one click: start the local server, open Shiori in the browser, and keep tray controls available.
@@ -49,9 +49,9 @@ Plain-English Go summary: the Windows entry point now prepares a private per-use
 - SHA-256 file exists beside it at `site/downloads/Shiori-Windows-x64.zip.sha256`.
 - Current ZIP size: 79,058,883 bytes (rebuilt 2026-09-23: shortcut + PWA + first-run redirect fix).
 - Current SHA-256: `3317ab19a02c060a6cbac11c75d238dc3220e1220f166594bab2b5541632ad36`.
-- Prior builds: 79,060,758 / `04f6bbb3â€¦bdd083` (shortcut + PWA); 79,057,527 / `3bf39e3aâ€¦fbfe3ed` (shortcut only); 79,054,554 / `a7a9a7b5â€¦08440c` (original).
+- Prior builds: 79,060,758 / `04f6bbb3…bdd083` (shortcut + PWA); 79,057,527 / `3bf39e3a…fbfe3ed` (shortcut only); 79,054,554 / `a7a9a7b5…08440c` (original).
 
-First-run redirect fix (2026-09-23): the setup-complete page used to auto-redirect after 3 s, but a cold start measured 3.1 s on a fast machine, so slower laptops would land on "site can't be reached". The page no longer redirects; `openDesktopWhenReady` now always runs (deadline raised to 90 s) and opens Shiori in a new tab only once the server answers. Site + README now warn about the SmartScreen "More info â†’ Run anyway" screen and point to the desktop icon. Windows Defender scan of the live download: no threats.
+First-run redirect fix (2026-09-23): the setup-complete page used to auto-redirect after 3 s, but a cold start measured 3.1 s on a fast machine, so slower laptops would land on "site can't be reached". The page no longer redirects; `openDesktopWhenReady` now always runs (deadline raised to 90 s) and opens Shiori in a new tab only once the server answers. Site + README now warn about the SmartScreen "More info → Run anyway" screen and point to the desktop icon. Windows Defender scan of the live download: no threats.
 - ZIP contents include `Shiori.exe`, `Shiori.ico`, README, SOURCE notice, GPL license, and 14 reviewed providers.
 - The script builds a clean source copy so old frontend chunks and the owner's source art are not bundled.
 - `windres` is optional. Without a compatible 64-bit resource compiler, the tray icon still works but Explorer may show Go's default executable icon.
@@ -59,7 +59,7 @@ First-run redirect fix (2026-09-23): the setup-complete page used to auto-redire
 ### Website
 
 - All Download buttons now point to `downloads/Shiori-Windows-x64.zip`.
-- `site/index.html`, `site/pop.html`, and `site/docs.html` explain the ZIP â†’ extract â†’ double-click â†’ choose password â†’ one-click future launch flow.
+- `site/index.html`, `site/pop.html`, and `site/docs.html` explain the ZIP → extract → double-click → choose password → one-click future launch flow.
 - Mobile floating download controls hide while the main install/checkout CTA is visible, preventing overlap.
 - Public GitHub, email, and payment destinations are empty until pseudonymous replacements exist.
 - The Pop support area now says support is not open yet and no longer renders the payment QR.
